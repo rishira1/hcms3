@@ -49,8 +49,8 @@ interface Stats {
 }
 
 export default function DistrictDashboard() {
-  const [selectedStatus, setSelectedStatus] = useState<string>('');
-  const [selectedDistrict, setSelectedDistrict] = useState<string>('');
+  const [selectedStatus, setSelectedStatus] = useState<string>('all');
+  const [selectedDistrict, setSelectedDistrict] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [viewingApplication, setViewingApplication] = useState<Application | null>(null);
   const [rejectingApplication, setRejectingApplication] = useState<Application | null>(null);
@@ -65,8 +65,8 @@ export default function DistrictDashboard() {
     queryKey: ['/api/admin/applications', selectedStatus, selectedDistrict],
     queryFn: async () => {
       const params = new URLSearchParams();
-      if (selectedStatus) params.append('status', selectedStatus);
-      if (selectedDistrict) params.append('district', selectedDistrict);
+      if (selectedStatus && selectedStatus !== 'all') params.append('status', selectedStatus);
+      if (selectedDistrict && selectedDistrict !== 'all') params.append('district', selectedDistrict);
       
       const authHeaders = getAuthHeaders();
       const response = await fetch(`/api/admin/applications?${params}`, {
@@ -267,7 +267,7 @@ export default function DistrictDashboard() {
                   <SelectValue placeholder="All Status" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Status</SelectItem>
+                  <SelectItem value="all">All Status</SelectItem>
                   <SelectItem value="submitted">Submitted</SelectItem>
                   <SelectItem value="verified">Verified</SelectItem>
                   <SelectItem value="rejected">Rejected</SelectItem>
@@ -279,7 +279,7 @@ export default function DistrictDashboard() {
                   <SelectValue placeholder="All Districts" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Districts</SelectItem>
+                  <SelectItem value="all">All Districts</SelectItem>
                   {DISTRICTS.map((district) => (
                     <SelectItem key={district} value={district}>
                       {district}
@@ -300,8 +300,8 @@ export default function DistrictDashboard() {
               <Button
                 variant="outline"
                 onClick={() => {
-                  setSelectedStatus('');
-                  setSelectedDistrict('');
+                  setSelectedStatus('all');
+                  setSelectedDistrict('all');
                   setSearchQuery('');
                 }}
               >
