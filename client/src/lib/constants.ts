@@ -1,0 +1,38 @@
+export const DISTRICTS = [
+  "Thiruvananthapuram",
+  "Kollam", 
+  "Pathanamthitta",
+  "Alappuzha",
+  "Kottayam",
+  "Idukki",
+  "Ernakulam",
+  "Thrissur",
+  "Palakkad",
+  "Malappuram"
+] as const;
+
+export const DIRECTORATES = [
+  { value: 'DME', label: 'DME' },
+  { value: 'DMRHS', label: 'DMRHS' },
+  { value: 'DPH&PM', label: 'DPH&PM' },
+  { value: 'ESI', label: 'ESI' },
+  { value: 'Other', label: 'Other' }
+] as const;
+
+export const MEMBERSHIP_TYPES = [
+  { 
+    value: 'New Membership', 
+    label: 'New Membership',
+    description: 'First time registration - ₹2,000'
+  },
+  { 
+    value: 'Annual Subscription fee', 
+    label: 'Annual Subscription',
+    description: 'Renewal subscription - ₹2,000'
+  }
+] as const;
+
+export const GENDER_OPTIONS = [
+  { value: 'Male', label: 'Male' },
+  { value: 'Female', label: 'Female' }
+] as const;
