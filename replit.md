@@ -82,6 +82,7 @@ Preferred communication style: Simple, everyday language.
 - **Status Tracking**: Real-time status updates with tracking numbers
 - **Rejection Handling**: Proper rejection flow with reason capture and email notification
 - **ID Generation**: Unique membership ID generation upon final approval
+- **ID Card Download**: Approved members can download their PDF membership cards via tracking page
 
 ### Security Measures
 - **Input Validation**: Comprehensive validation using Zod schemas

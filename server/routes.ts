@@ -380,6 +380,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Download ID card by tracking number
+  app.get("/api/download-id-card/:trackingNumber", async (req, res) => {
+    try {
+      const { trackingNumber } = req.params;
+      
+      const member = await storage.getMemberByTrackingNumber(trackingNumber);
+      if (!member) {
+        return res.status(404).json({ message: 'Application not found' });
+      }
+
+      if (member.status !== 'approved' || !member.membershipId) {
+        return res.status(400).json({ message: 'ID card not yet available. Application must be approved.' });
+      }
+
+      // Generate the PDF using the existing generateMembershipCard service
+      const cardData = {
+        name: member.name,
+        membershipId: member.membershipId!,
+        photoUrl: member.photoUrl || '',
+        designation: member.designation,
+        district: member.district,
+        validUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toLocaleDateString('en-GB') // Valid for 1 year
+      };
+      
+      const pdfBuffer = await generateMembershipCard(cardData);
+      
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', `attachment; filename="HCMS-ID-Card-${member.membershipId}.pdf"`);
+      res.send(pdfBuffer);
+    } catch (error: any) {
+      console.error('Download ID card error:', error);
+      res.status(500).json({ message: 'Failed to download ID card' });
+    }
+  });
+
   // Get single application details (for admin view)
   app.get("/api/admin/applications/:id", authenticateAdmin, async (req: any, res) => {
     try {

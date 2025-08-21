@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { Search, X, CheckCircle, Clock, AlertCircle, IdCard } from 'lucide-react';
+import { Search, X, CheckCircle, Clock, AlertCircle, IdCard, Download } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { apiRequest } from '@/lib/queryClient';
+import { useToast } from '@/hooks/use-toast';
 
 interface TrackingModalProps {
   open: boolean;
@@ -52,6 +53,7 @@ const STATUS_CONFIG = {
 export function TrackingModal({ open, onOpenChange }: TrackingModalProps) {
   const [trackingNumber, setTrackingNumber] = useState('');
   const [applicationStatus, setApplicationStatus] = useState<ApplicationStatus | null>(null);
+  const { toast } = useToast();
 
   const trackMutation = useMutation({
     mutationFn: async (trackingNum: string) => {
@@ -78,6 +80,39 @@ export function TrackingModal({ open, onOpenChange }: TrackingModalProps) {
     onOpenChange(false);
     setTrackingNumber('');
     setApplicationStatus(null);
+  };
+
+  const handleDownloadIdCard = async () => {
+    if (!applicationStatus?.membershipId) return;
+    
+    try {
+      const response = await fetch(`/api/download-id-card/${applicationStatus.trackingNumber}`);
+      
+      if (!response.ok) {
+        throw new Error('Failed to download ID card');
+      }
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `HCMS-ID-Card-${applicationStatus.membershipId}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+      toast({
+        title: 'Download Started',
+        description: 'Your membership ID card is being downloaded.',
+      });
+    } catch (error: any) {
+      toast({
+        title: 'Download Failed',
+        description: error.message || 'Failed to download ID card',
+        variant: 'destructive',
+      });
+    }
   };
 
   return (
@@ -276,6 +311,14 @@ export function TrackingModal({ open, onOpenChange }: TrackingModalProps) {
                           <p className="text-sm font-mono text-green-700 mt-1">
                             ID: {applicationStatus.membershipId}
                           </p>
+                          <Button
+                            onClick={handleDownloadIdCard}
+                            className="mt-2 bg-primary hover:bg-primary/90 text-sm h-8"
+                            size="sm"
+                          >
+                            <Download className="h-3 w-3 mr-2" />
+                            Download ID Card
+                          </Button>
                         </div>
                       ) : (
                         <p className="text-sm text-gray-500">
