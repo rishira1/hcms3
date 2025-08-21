@@ -1,0 +1,29 @@
+Build a full-stack web application for an HCMS membership registration system based on the following Google Form fields: 
+- Name* (text, format: Name followed by Initial, no prefix Dr, no space/comma)
+- Email* (text)
+- Qualification* (text, e.g., MBBS DTD MD RESPIRATORY MEDICINE, no full stop/comma)
+- Date of Birth* (date, format: dd-mm-yyyy)
+- Gender* (multiple choice: Male, Female)
+- Aadhaar Number* (text)
+- Date of Joining into the Service* (date, format: dd-mm-yyyy)
+- Permanent Residential Address* (text)
+- Current Designation* (text)
+- Working Directorate* (multiple choice: DME, DMRHS, DPH&PM, ESI, Other with text input)
+- Current Working Station* (text)
+- Current Working District* (dropdown, assume 10 district options)
+- New Membership or Annual Subscription fee* (multiple choice: New Membership, Annual Subscription fee)
+
+The application should include:
+1. A user portal with a form matching these fields, styled with Tailwind CSS.
+2. File uploads for Photo, ID Card, and Scanned Signature, stored in Cloudinary.
+3. Razorpay integration for a ₹2000 payment (UPI, card, net banking) based on the selected membership type.
+4. A confirmation page with a unique application tracking number.
+5. Admin dashboards:
+   - District GS dashboard to view, verify, or reject applications (with rejection reason input).
+   - State GS dashboard to approve verified applications and generate a unique membership ID.
+6. Generate a PDF ID card with member details (Name, Photo, Membership ID) using pdfkit, emailed via SendGrid.
+7. Send email (SendGrid)  notifications for submission (with tracking number) and approval (with PDF).
+8. Store data in a Supabase database with collections for members (all form fields, file URLs, status) and admins (username, password, role).
+9. Secure admin access with JWT authentication (District GS vs. State GS roles).
+10. Deploy to Vercel with a shareable URL.
+Use React with Tailwind CSS for the frontend, Node.js for the backend, and Supabase for the database. Ensure a responsive, professional UI.
