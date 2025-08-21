@@ -84,29 +84,45 @@ export async function registerRoutes(app: Express): Promise<Server> {
     { name: 'signature', maxCount: 1 }
   ]), async (req, res) => {
     try {
-      // Validate form data
-      const memberData = insertMemberSchema.parse(req.body);
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
       if (!files.photo?.[0] || !files.idCard?.[0] || !files.signature?.[0]) {
         return res.status(400).json({ message: 'All files (photo, ID card, signature) are required' });
       }
 
-      // Upload files to Cloudinary
+      console.log('Files received:', {
+        photo: files.photo?.[0]?.originalname,
+        idCard: files.idCard?.[0]?.originalname,
+        signature: files.signature?.[0]?.originalname
+      });
+
+      // Upload files to Cloudinary first
       const [photoResult, idCardResult, signatureResult] = await Promise.all([
         uploadFile(files.photo[0].buffer, `photo_${Date.now()}`, 'hcms/photos'),
         uploadFile(files.idCard[0].buffer, `id_${Date.now()}`, 'hcms/ids'),
         uploadFile(files.signature[0].buffer, `sig_${Date.now()}`, 'hcms/signatures')
       ]);
 
-      // Create member record
-      const member = await storage.createMember({
-        ...memberData,
+      console.log('Files uploaded successfully:', {
+        photo: photoResult.secure_url,
+        idCard: idCardResult.secure_url,
+        signature: signatureResult.secure_url
+      });
+
+      // Prepare member data with uploaded URLs
+      const memberDataWithFiles = {
+        ...req.body,
         photoUrl: photoResult.secure_url,
         idCardUrl: idCardResult.secure_url,
         signatureUrl: signatureResult.secure_url,
         paymentStatus: 'pending'
-      });
+      };
+
+      // Validate complete member data
+      const validatedData = insertMemberSchema.parse(memberDataWithFiles);
+
+      // Create member record
+      const member = await storage.createMember(validatedData);
 
       res.json({
         success: true,
