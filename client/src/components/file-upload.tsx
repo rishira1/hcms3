@@ -52,9 +52,11 @@ export function FileUpload({
     }
 
     // Validate file type
-    const allowedTypes = accept.split(',').map(type => type.trim());
-    if (!allowedTypes.some(allowedType => selectedFile.type.includes(allowedType.replace('*', '')))) {
-      alert('Invalid file type. Please select a valid file.');
+    const allowedExtensions = accept.split(',').map(ext => ext.trim().toLowerCase());
+    const fileExtension = '.' + selectedFile.name.split('.').pop()?.toLowerCase();
+    
+    if (!allowedExtensions.includes(fileExtension)) {
+      alert(`Invalid file type. Please select a file with one of these extensions: ${allowedExtensions.join(', ')}`);
       return;
     }
 

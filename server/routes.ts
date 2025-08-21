@@ -39,6 +39,39 @@ const authenticateAdmin = async (req: any, res: any, next: any) => {
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
+  // Initialize database with sample admin data
+  const initializeDatabase = async () => {
+    try {
+      // Create a test District GS admin
+      const districtAdmin = await storage.getAdminByUsername('district_gs_test');
+      if (!districtAdmin) {
+        await storage.createAdmin({
+          username: 'district_gs_test',
+          password: await bcrypt.hash('test123', 10),
+          role: 'district_gs',
+          district: 'Thiruvananthapuram'
+        });
+        console.log('Created test District GS admin: district_gs_test / test123');
+      }
+
+      // Create a test State GS admin
+      const stateAdmin = await storage.getAdminByUsername('state_gs_test');
+      if (!stateAdmin) {
+        await storage.createAdmin({
+          username: 'state_gs_test',
+          password: await bcrypt.hash('test123', 10),
+          role: 'state_gs'
+        });
+        console.log('Created test State GS admin: state_gs_test / test123');
+      }
+    } catch (error) {
+      console.log('Database initialization skipped - tables may not exist yet');
+    }
+  };
+
+  // Initialize database on startup
+  setTimeout(initializeDatabase, 2000);
+  
   // Health check endpoint
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
