@@ -39,6 +39,11 @@ const authenticateAdmin = async (req: any, res: any, next: any) => {
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
+  // Health check endpoint
+  app.get("/api/health", (req, res) => {
+    res.json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+  
   // Member registration endpoint
   app.post("/api/register", upload.fields([
     { name: 'photo', maxCount: 1 },
