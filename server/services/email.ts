@@ -30,10 +30,13 @@ export async function sendEmail(params: EmailParams): Promise<boolean> {
       emailData.text = params.text;
     }
 
-    await resend.emails.send(emailData);
+    console.log('Sending email with data:', { to: emailData.to, from: emailData.from, subject: emailData.subject });
+    const result = await resend.emails.send(emailData);
+    console.log('Email send result:', result);
     return true;
   } catch (error) {
     console.error('Resend email error:', error);
+    console.error('Error details:', JSON.stringify(error, null, 2));
     return false;
   }
 }
@@ -83,12 +86,15 @@ export async function sendRegistrationConfirmation(email: string, name: string, 
     </div>
   `;
 
-  return await sendEmail({
+  console.log('Sending registration confirmation to:', email);
+  const result = await sendEmail({
     to: email,
     from: process.env.RESEND_FROM_EMAIL || 'HCMS <noreply@hcms.gov.in>',
     subject: 'HCMS Membership Application Confirmation',
     html,
   });
+  console.log('Registration confirmation sent result:', result);
+  return result;
 }
 
 export async function sendApprovalNotification(email: string, name: string, membershipId: string, pdfBuffer?: Buffer): Promise<boolean> {
@@ -140,16 +146,23 @@ export async function sendApprovalNotification(email: string, name: string, memb
   `;
 
   try {
-    await resend.emails.send({
+    console.log('Attempting to send approval email to:', email);
+    console.log('Attachments count:', attachments.length);
+    console.log('From email:', process.env.RESEND_FROM_EMAIL);
+    
+    const result = await resend.emails.send({
       to: [email],
       from: process.env.RESEND_FROM_EMAIL || 'HCMS <noreply@hcms.gov.in>',
       subject: 'HCMS Membership Approved - ID Card Attached',
       html,
       attachments,
     });
+    
+    console.log('Resend response:', result);
     return true;
   } catch (error) {
     console.error('Resend email error:', error);
+    console.error('Error details:', JSON.stringify(error, null, 2));
     return false;
   }
 }

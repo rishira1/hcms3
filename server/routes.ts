@@ -342,7 +342,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
 
       // Send approval notification with PDF attachment
-      await sendApprovalNotification(member.email, member.name, membershipId, pdfBuffer);
+      console.log('Sending approval notification to:', member.email, 'with membership ID:', membershipId);
+      const emailSent = await sendApprovalNotification(member.email, member.name, membershipId, pdfBuffer);
+      console.log('Email sent result:', emailSent);
 
       res.json({ 
         success: true, 
