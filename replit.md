@@ -59,7 +59,7 @@ Preferred communication style: Simple, everyday language.
 - **Template System**: Structured PDF generation with proper formatting and branding
 
 ### Email System
-- **Email Service**: SendGrid for reliable email delivery
+- **Email Service**: Resend for modern, reliable email delivery
 - **Notification Types**:
   - Registration confirmation with tracking number
   - Application approval with PDF attachment
@@ -100,7 +100,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Payment & Communication
 - **Razorpay**: Payment gateway for Indian market with UPI, card, and net banking support
-- **SendGrid**: Email delivery service for transactional emails and notifications
+- **Resend**: Modern email delivery service for transactional emails and notifications
 
 ### Development & Build Tools
 - **Replit**: Development environment with live preview and collaboration features

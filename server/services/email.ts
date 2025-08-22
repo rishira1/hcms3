@@ -1,11 +1,10 @@
-import { MailService } from '@sendgrid/mail';
+import { Resend } from 'resend';
 
-if (!process.env.SENDGRID_API_KEY) {
-  throw new Error("SENDGRID_API_KEY environment variable must be set");
+if (!process.env.RESEND_API_KEY) {
+  throw new Error("RESEND_API_KEY environment variable must be set");
 }
 
-const mailService = new MailService();
-mailService.setApiKey(process.env.SENDGRID_API_KEY!);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface EmailParams {
   to: string;
@@ -17,16 +16,24 @@ interface EmailParams {
 
 export async function sendEmail(params: EmailParams): Promise<boolean> {
   try {
-    await mailService.send({
-      to: params.to,
+    const emailData: any = {
+      to: [params.to],
       from: params.from,
       subject: params.subject,
-      text: params.text,
-      html: params.html,
-    });
+    };
+
+    if (params.html) {
+      emailData.html = params.html;
+    }
+    
+    if (params.text) {
+      emailData.text = params.text;
+    }
+
+    await resend.emails.send(emailData);
     return true;
   } catch (error) {
-    console.error('SendGrid email error:', error);
+    console.error('Resend email error:', error);
     return false;
   }
 }
@@ -78,7 +85,7 @@ export async function sendRegistrationConfirmation(email: string, name: string, 
 
   return await sendEmail({
     to: email,
-    from: process.env.SENDGRID_FROM_EMAIL || 'noreply@hcms.gov.in',
+    from: process.env.RESEND_FROM_EMAIL || 'HCMS <noreply@hcms.gov.in>',
     subject: 'HCMS Membership Application Confirmation',
     html,
   });
@@ -86,10 +93,8 @@ export async function sendRegistrationConfirmation(email: string, name: string, 
 
 export async function sendApprovalNotification(email: string, name: string, membershipId: string, pdfBuffer?: Buffer): Promise<boolean> {
   const attachments = pdfBuffer ? [{
-    content: pdfBuffer.toString('base64'),
+    content: pdfBuffer,
     filename: 'membership-card.pdf',
-    type: 'application/pdf',
-    disposition: 'attachment',
   }] : [];
 
   const html = `
@@ -135,16 +140,16 @@ export async function sendApprovalNotification(email: string, name: string, memb
   `;
 
   try {
-    await mailService.send({
-      to: email,
-      from: process.env.SENDGRID_FROM_EMAIL || 'noreply@hcms.gov.in',
+    await resend.emails.send({
+      to: [email],
+      from: process.env.RESEND_FROM_EMAIL || 'HCMS <noreply@hcms.gov.in>',
       subject: 'HCMS Membership Approved - ID Card Attached',
       html,
       attachments,
     });
     return true;
   } catch (error) {
-    console.error('SendGrid email error:', error);
+    console.error('Resend email error:', error);
     return false;
   }
 }
@@ -194,7 +199,7 @@ export async function sendRejectionNotification(email: string, name: string, rea
 
   return await sendEmail({
     to: email,
-    from: process.env.SENDGRID_FROM_EMAIL || 'noreply@hcms.gov.in',
+    from: process.env.RESEND_FROM_EMAIL || 'HCMS <noreply@hcms.gov.in>',
     subject: 'HCMS Membership Application - Action Required',
     html,
   });
