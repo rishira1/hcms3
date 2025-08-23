@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
-import { Upload, X, FileText, Camera, PenTool } from 'lucide-react';
+import { Upload, X, FileText, Camera, PenTool, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 
 interface FileUploadProps {
   type: 'photo' | 'idCard' | 'signature';
@@ -9,6 +10,8 @@ interface FileUploadProps {
   accept: string;
   maxSize: number; // in MB
   required?: boolean;
+  isUploading?: boolean;
+  uploadProgress?: number;
 }
 
 const FILE_TYPE_CONFIG = {
@@ -35,7 +38,9 @@ export function FileUpload({
   onFileChange, 
   accept, 
   maxSize, 
-  required = false 
+  required = false,
+  isUploading = false,
+  uploadProgress = 0
 }: FileUploadProps) {
   const [preview, setPreview] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
@@ -151,23 +156,35 @@ export function FileUpload({
           <p className="text-sm text-gray-500 mb-4">
             {(file.size / (1024 * 1024)).toFixed(2)} MB
           </p>
-          <div className="flex justify-center space-x-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => fileInputRef.current?.click()}
-            >
-              Change File
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={removeFile}
-            >
-              <X className="h-4 w-4 mr-1" />
-              Remove
-            </Button>
-          </div>
+          
+          {isUploading ? (
+            <div className="space-y-3">
+              <div className="flex items-center justify-center space-x-2">
+                <Loader2 className="h-4 w-4 animate-spin text-blue-600" />
+                <span className="text-sm text-blue-600">Uploading... {uploadProgress}%</span>
+              </div>
+              <Progress value={uploadProgress} className="h-2" />
+              <p className="text-xs text-gray-500">Please wait while your file is being processed</p>
+            </div>
+          ) : (
+            <div className="flex justify-center space-x-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                Change File
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={removeFile}
+              >
+                <X className="h-4 w-4 mr-1" />
+                Remove
+              </Button>
+            </div>
+          )}
         </div>
       ) : (
         // Empty state

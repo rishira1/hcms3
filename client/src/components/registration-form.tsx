@@ -57,6 +57,16 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
     idCard: null,
     signature: null
   });
+  
+  const [uploadStates, setUploadStates] = useState<{
+    photo: { isUploading: boolean; progress: number };
+    idCard: { isUploading: boolean; progress: number };
+    signature: { isUploading: boolean; progress: number };
+  }>({
+    photo: { isUploading: false, progress: 0 },
+    idCard: { isUploading: false, progress: 0 },
+    signature: { isUploading: false, progress: 0 }
+  });
 
   const { toast } = useToast();
 
@@ -583,28 +593,115 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                   <FileUpload
                     type="photo"
                     file={files.photo}
-                    onFileChange={(file) => setFiles(prev => ({ ...prev, photo: file }))}
+                    onFileChange={(file) => {
+                      if (file) {
+                        // Start upload simulation
+                        setUploadStates(prev => ({ 
+                          ...prev, 
+                          photo: { isUploading: true, progress: 0 } 
+                        }));
+                        
+                        // Simulate upload progress
+                        const interval = setInterval(() => {
+                          setUploadStates(prev => {
+                            const currentProgress = prev.photo.progress;
+                            if (currentProgress >= 100) {
+                              clearInterval(interval);
+                              return {
+                                ...prev,
+                                photo: { isUploading: false, progress: 100 }
+                              };
+                            }
+                            return {
+                              ...prev,
+                              photo: { isUploading: true, progress: currentProgress + 10 }
+                            };
+                          });
+                        }, 200);
+                      }
+                      setFiles(prev => ({ ...prev, photo: file }));
+                    }}
                     accept=".jpg,.jpeg,.png"
                     maxSize={2}
                     required
+                    isUploading={uploadStates.photo.isUploading}
+                    uploadProgress={uploadStates.photo.progress}
                   />
 
                   <FileUpload
                     type="idCard"
                     file={files.idCard}
-                    onFileChange={(file) => setFiles(prev => ({ ...prev, idCard: file }))}
+                    onFileChange={(file) => {
+                      if (file) {
+                        // Start upload simulation
+                        setUploadStates(prev => ({ 
+                          ...prev, 
+                          idCard: { isUploading: true, progress: 0 } 
+                        }));
+                        
+                        // Simulate upload progress
+                        const interval = setInterval(() => {
+                          setUploadStates(prev => {
+                            const currentProgress = prev.idCard.progress;
+                            if (currentProgress >= 100) {
+                              clearInterval(interval);
+                              return {
+                                ...prev,
+                                idCard: { isUploading: false, progress: 100 }
+                              };
+                            }
+                            return {
+                              ...prev,
+                              idCard: { isUploading: true, progress: currentProgress + 10 }
+                            };
+                          });
+                        }, 200);
+                      }
+                      setFiles(prev => ({ ...prev, idCard: file }));
+                    }}
                     accept=".jpg,.jpeg,.png,.pdf"
                     maxSize={5}
                     required
+                    isUploading={uploadStates.idCard.isUploading}
+                    uploadProgress={uploadStates.idCard.progress}
                   />
 
                   <FileUpload
                     type="signature"
                     file={files.signature}
-                    onFileChange={(file) => setFiles(prev => ({ ...prev, signature: file }))}
+                    onFileChange={(file) => {
+                      if (file) {
+                        // Start upload simulation
+                        setUploadStates(prev => ({ 
+                          ...prev, 
+                          signature: { isUploading: true, progress: 0 } 
+                        }));
+                        
+                        // Simulate upload progress
+                        const interval = setInterval(() => {
+                          setUploadStates(prev => {
+                            const currentProgress = prev.signature.progress;
+                            if (currentProgress >= 100) {
+                              clearInterval(interval);
+                              return {
+                                ...prev,
+                                signature: { isUploading: false, progress: 100 }
+                              };
+                            }
+                            return {
+                              ...prev,
+                              signature: { isUploading: true, progress: currentProgress + 10 }
+                            };
+                          });
+                        }, 200);
+                      }
+                      setFiles(prev => ({ ...prev, signature: file }));
+                    }}
                     accept=".jpg,.jpeg,.png"
                     maxSize={1}
                     required
+                    isUploading={uploadStates.signature.isUploading}
+                    uploadProgress={uploadStates.signature.progress}
                   />
                 </div>
 
