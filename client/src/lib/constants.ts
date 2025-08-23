@@ -24,10 +24,28 @@ export const DISTRICTS = [
 ] as const;
 
 export const DIRECTORATES = [
-  { value: 'DME', label: 'DME' },
-  { value: 'DMRHS', label: 'DMRHS' },
-  { value: 'DPH&PM', label: 'DPH&PM' },
-  { value: 'ESI', label: 'ESI' },
+  { value: 'DGHS', label: 'DGHS - Directorate General of Health Services' },
+  { value: 'DME', label: 'DME - Directorate of Medical Education' },
+  { value: 'DMRHS', label: 'DMRHS - Directorate of Medical & Rural Health Services' },
+  { value: 'DPH&PM', label: 'DPH&PM - Directorate of Public Health & Preventive Medicine' },
+  { value: 'DFWS', label: 'DFWS - Directorate of Family Welfare Services' },
+  { value: 'AYUSH', label: 'AYUSH - Directorate of AYUSH' },
+  { value: 'ESI', label: 'ESI - Employee State Insurance' },
+  { value: 'CGHS', label: 'CGHS - Central Government Health Scheme' },
+  { value: 'Railways', label: 'Railway Health Services' },
+  { value: 'Defence', label: 'Defence Medical Services' },
+  { value: 'DRDO', label: 'DRDO - Defence Research & Development Organisation' },
+  { value: 'AIIMS', label: 'AIIMS - All India Institute of Medical Sciences' },
+  { value: 'PGI', label: 'PGI - Post Graduate Institute of Medical Sciences' },
+  { value: 'GMCH', label: 'GMCH - Government Medical College & Hospital' },
+  { value: 'District Hospital', label: 'District Hospital' },
+  { value: 'CHC', label: 'CHC - Community Health Centre' },
+  { value: 'PHC', label: 'PHC - Primary Health Centre' },
+  { value: 'Sub Centre', label: 'Sub Centre' },
+  { value: 'Urban Health', label: 'Urban Health Services' },
+  { value: 'NRHM', label: 'NRHM - National Rural Health Mission' },
+  { value: 'Private Sector', label: 'Private Healthcare Sector' },
+  { value: 'NGO', label: 'NGO - Non-Governmental Organisation' },
   { value: 'Other', label: 'Other' }
 ] as const;
 
