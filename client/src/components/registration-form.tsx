@@ -341,7 +341,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         onValueChange={(value) => form.setValue('qualification', value)}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="Select your medical qualification" />
+                          <SelectValue placeholder="Select your medical qualification (e.g., MBBS, MBBS MD)" />
                         </SelectTrigger>
                         <SelectContent>
                           {QUALIFICATIONS.map((option) => (
@@ -477,7 +477,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         onValueChange={(value) => form.setValue('designation', value)}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="Select your current designation" />
+                          <SelectValue placeholder="Select your current designation (e.g., Medical Officer)" />
                         </SelectTrigger>
                         <SelectContent>
                           {DESIGNATIONS.map((option) => (
@@ -532,7 +532,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         onValueChange={(value) => form.setValue('directorate', value as any)}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="Select Directorate" />
+                          <SelectValue placeholder="Select your working directorate (e.g., DMRHS, ESI)" />
                         </SelectTrigger>
                         <SelectContent>
                           {DIRECTORATES.map((option) => (
