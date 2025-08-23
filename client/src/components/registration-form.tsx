@@ -14,7 +14,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { FileUpload } from './file-upload';
 import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
-import { DISTRICTS, DIRECTORATES, MEMBERSHIP_TYPES, GENDER_OPTIONS, DESIGNATIONS } from '@/lib/constants';
+import { DISTRICTS, DIRECTORATES, MEMBERSHIP_TYPES, GENDER_OPTIONS, DESIGNATIONS, QUALIFICATIONS } from '@/lib/constants';
 
 declare global {
   interface Window {
@@ -26,6 +26,7 @@ const formSchema = z.object({
   name: z.string().min(1, 'Name is required').regex(/^[A-Za-z\s]+$/, 'Name should contain only letters and spaces'),
   email: z.string().email('Invalid email format'),
   qualification: z.string().min(1, 'Qualification is required'),
+  otherQualification: z.string().optional(),
   dob: z.string().min(1, 'Date of birth is required'),
   gender: z.enum(['Male', 'Female'], { required_error: 'Please select gender' }),
   aadhaar: z.string().regex(/^\d{4}\s\d{4}\s\d{4}$/, 'Aadhaar should be in format: 1234 5678 9012'),
@@ -333,19 +334,42 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                     </div>
 
                     <div>
-                      <Label htmlFor="qualification">Qualification *</Label>
-                      <Input
-                        id="qualification"
-                        {...form.register('qualification')}
-                        placeholder="Enter your qualification (e.g., MBBS MD)"
-                        onFocus={(e) => e.target.placeholder = ''}
-                        onBlur={(e) => e.target.placeholder = 'Enter your qualification (e.g., MBBS MD)'}
-                      />
-                      <p className="text-xs text-gray-500 mt-1">No full stops or commas</p>
+                      <Label htmlFor="qualification">Medical Qualification *</Label>
+                      <Select
+                        value={form.watch('qualification')}
+                        onValueChange={(value) => form.setValue('qualification', value)}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select your medical qualification" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {QUALIFICATIONS.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                       {form.formState.errors.qualification && (
                         <p className="text-sm text-red-600">{form.formState.errors.qualification.message}</p>
                       )}
                     </div>
+
+                    {form.watch('qualification') === 'Other' && (
+                      <div>
+                        <Label htmlFor="otherQualification">Specify Other Qualification *</Label>
+                        <Input
+                          id="otherQualification"
+                          {...form.register('otherQualification')}
+                          placeholder="Please specify your medical qualification"
+                          onFocus={(e) => e.target.placeholder = ''}
+                          onBlur={(e) => e.target.placeholder = 'Please specify your medical qualification'}
+                        />
+                        {form.formState.errors.otherQualification && (
+                          <p className="text-sm text-red-600">{form.formState.errors.otherQualification.message}</p>
+                        )}
+                      </div>
+                    )}
 
                     <div>
                       <Label htmlFor="dob">Date of Birth *</Label>

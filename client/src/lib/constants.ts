@@ -101,6 +101,28 @@ export const DESIGNATIONS = [
   { value: 'Other', label: 'Other' }
 ] as const;
 
+export const QUALIFICATIONS = [
+  { value: 'MBBS', label: 'MBBS - Bachelor of Medicine and Bachelor of Surgery' },
+  { value: 'MBBS, MD', label: 'MBBS, MD - Doctor of Medicine' },
+  { value: 'MBBS, MS', label: 'MBBS, MS - Master of Surgery' },
+  { value: 'MBBS, DNB', label: 'MBBS, DNB - Diplomate of National Board' },
+  { value: 'MBBS, DM', label: 'MBBS, DM - Doctorate of Medicine (Super Specialty)' },
+  { value: 'MBBS, MCh', label: 'MBBS, MCh - Master of Chirurgiae (Super Specialty Surgery)' },
+  { value: 'MBBS, MRCP', label: 'MBBS, MRCP - Member of Royal College of Physicians' },
+  { value: 'MBBS, MRCS', label: 'MBBS, MRCS - Member of Royal College of Surgeons' },
+  { value: 'MBBS, FRCP', label: 'MBBS, FRCP - Fellow of Royal College of Physicians' },
+  { value: 'MBBS, FRCS', label: 'MBBS, FRCS - Fellow of Royal College of Surgeons' },
+  { value: 'MBBS, FICS', label: 'MBBS, FICS - Fellow of International College of Surgeons' },
+  { value: 'MBBS, FICP', label: 'MBBS, FICP - Fellow of Indian College of Physicians' },
+  { value: 'MBBS, MNAMS', label: 'MBBS, MNAMS - Member of National Academy of Medical Sciences' },
+  { value: 'MBBS, FAMS', label: 'MBBS, FAMS - Fellow of Academy of Medical Sciences' },
+  { value: 'MBBS, Diploma', label: 'MBBS with Medical Council Recognized Diploma' },
+  { value: 'MBBS, Certificate Course', label: 'MBBS with Certified Medical Course' },
+  { value: 'MBBS, Fellowship', label: 'MBBS with Medical Fellowship' },
+  { value: 'MBBS, PhD', label: 'MBBS, PhD - Doctor of Philosophy' },
+  { value: 'Other', label: 'Other Medical Qualification' }
+] as const;
+
 export const GENDER_OPTIONS = [
   { value: 'Male', label: 'Male' },
   { value: 'Female', label: 'Female' }
