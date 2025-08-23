@@ -62,6 +62,45 @@ export const MEMBERSHIP_TYPES = [
   }
 ] as const;
 
+export const DESIGNATIONS = [
+  { value: 'Medical Officer', label: 'Medical Officer' },
+  { value: 'Senior Medical Officer', label: 'Senior Medical Officer' },
+  { value: 'Chief Medical Officer', label: 'Chief Medical Officer' },
+  { value: 'Civil Surgeon', label: 'Civil Surgeon' },
+  { value: 'Joint Civil Surgeon', label: 'Joint Civil Surgeon' },
+  { value: 'Assistant Civil Surgeon', label: 'Assistant Civil Surgeon' },
+  { value: 'Block Medical Officer', label: 'Block Medical Officer' },
+  { value: 'District Programme Officer', label: 'District Programme Officer' },
+  { value: 'Programme Officer', label: 'Programme Officer' },
+  { value: 'Specialist Doctor', label: 'Specialist Doctor' },
+  { value: 'Senior Specialist', label: 'Senior Specialist' },
+  { value: 'Chief Specialist', label: 'Chief Specialist' },
+  { value: 'Consultant', label: 'Consultant' },
+  { value: 'Senior Consultant', label: 'Senior Consultant' },
+  { value: 'Professor', label: 'Professor' },
+  { value: 'Associate Professor', label: 'Associate Professor' },
+  { value: 'Assistant Professor', label: 'Assistant Professor' },
+  { value: 'Lecturer', label: 'Lecturer' },
+  { value: 'Senior Resident', label: 'Senior Resident' },
+  { value: 'Junior Resident', label: 'Junior Resident' },
+  { value: 'House Surgeon', label: 'House Surgeon' },
+  { value: 'Intern', label: 'Intern' },
+  { value: 'Registrar', label: 'Registrar' },
+  { value: 'Senior Registrar', label: 'Senior Registrar' },
+  { value: 'General Practitioner', label: 'General Practitioner' },
+  { value: 'Family Physician', label: 'Family Physician' },
+  { value: 'Emergency Medical Officer', label: 'Emergency Medical Officer' },
+  { value: 'Casualty Medical Officer', label: 'Casualty Medical Officer' },
+  { value: 'Medical Superintendent', label: 'Medical Superintendent' },
+  { value: 'Deputy Medical Superintendent', label: 'Deputy Medical Superintendent' },
+  { value: 'Assistant Medical Superintendent', label: 'Assistant Medical Superintendent' },
+  { value: 'Director', label: 'Director' },
+  { value: 'Joint Director', label: 'Joint Director' },
+  { value: 'Deputy Director', label: 'Deputy Director' },
+  { value: 'Assistant Director', label: 'Assistant Director' },
+  { value: 'Other', label: 'Other' }
+] as const;
+
 export const GENDER_OPTIONS = [
   { value: 'Male', label: 'Male' },
   { value: 'Female', label: 'Female' }

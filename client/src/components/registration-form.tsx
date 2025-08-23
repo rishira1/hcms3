@@ -14,7 +14,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { FileUpload } from './file-upload';
 import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
-import { DISTRICTS, DIRECTORATES, MEMBERSHIP_TYPES, GENDER_OPTIONS } from '@/lib/constants';
+import { DISTRICTS, DIRECTORATES, MEMBERSHIP_TYPES, GENDER_OPTIONS, DESIGNATIONS } from '@/lib/constants';
 
 declare global {
   interface Window {
@@ -32,7 +32,8 @@ const formSchema = z.object({
   joiningDate: z.string().min(1, 'Joining date is required'),
   address: z.string().min(1, 'Address is required'),
   designation: z.string().min(1, 'Designation is required'),
-  directorate: z.enum(['DME', 'DMRHS', 'DPH&PM', 'ESI', 'Other'], { required_error: 'Please select directorate' }),
+  otherDesignation: z.string().optional(),
+  directorate: z.enum(['DGHS', 'DME', 'DMRHS', 'DPH&PM', 'DFWS', 'AYUSH', 'ESI', 'CGHS', 'Railways', 'Defence', 'DRDO', 'AIIMS', 'PGI', 'GMCH', 'District Hospital', 'CHC', 'PHC', 'Sub Centre', 'Urban Health', 'NRHM', 'Private Sector', 'NGO', 'Other'], { required_error: 'Please select directorate' }),
   otherDirectorate: z.string().optional(),
   workingStation: z.string().min(1, 'Working station is required'),
   district: z.string().min(1, 'District is required'),
@@ -412,17 +413,41 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
 
                     <div>
                       <Label htmlFor="designation">Current Designation *</Label>
-                      <Input
-                        id="designation"
-                        {...form.register('designation')}
-                        placeholder="Enter your current designation"
-                        onFocus={(e) => e.target.placeholder = ''}
-                        onBlur={(e) => e.target.placeholder = 'Enter your current designation'}
-                      />
+                      <Select
+                        value={form.watch('designation')}
+                        onValueChange={(value) => form.setValue('designation', value)}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select your current designation" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {DESIGNATIONS.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                       {form.formState.errors.designation && (
                         <p className="text-sm text-red-600">{form.formState.errors.designation.message}</p>
                       )}
                     </div>
+
+                    {form.watch('designation') === 'Other' && (
+                      <div>
+                        <Label htmlFor="otherDesignation">Specify Other Designation *</Label>
+                        <Input
+                          id="otherDesignation"
+                          {...form.register('otherDesignation')}
+                          placeholder="Please specify your designation"
+                          onFocus={(e) => e.target.placeholder = ''}
+                          onBlur={(e) => e.target.placeholder = 'Please specify your designation'}
+                        />
+                        {form.formState.errors.otherDesignation && (
+                          <p className="text-sm text-red-600">{form.formState.errors.otherDesignation.message}</p>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   <div>
