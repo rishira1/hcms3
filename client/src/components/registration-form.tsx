@@ -316,7 +316,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <Label htmlFor="name">Full Name *</Label>
+                      <Label htmlFor="name" className="font-bold">Full Name *</Label>
                       <Input
                         id="name"
                         {...form.register('name')}
@@ -331,7 +331,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                     </div>
 
                     <div>
-                      <Label htmlFor="email">Email Address *</Label>
+                      <Label htmlFor="email" className="font-bold">Email Address *</Label>
                       <Input
                         id="email"
                         type="email"
@@ -347,7 +347,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                     </div>
 
                     <div>
-                      <Label htmlFor="qualification">Medical Qualification *</Label>
+                      <Label htmlFor="qualification" className="font-bold">Medical Qualification *</Label>
                       <Input
                         id="qualification"
                         {...form.register('qualification')}
@@ -362,7 +362,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                     </div>
 
                     <div>
-                      <Label htmlFor="dob">Date of Birth *</Label>
+                      <Label htmlFor="dob" className="font-bold">Date of Birth *</Label>
                       <Input
                         id="dob"
                         type="date"
@@ -375,7 +375,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                     </div>
 
                     <div>
-                      <Label>Gender *</Label>
+                      <Label className="font-bold">Gender *</Label>
                       <RadioGroup
                         value={form.watch('gender')}
                         onValueChange={(value) => form.setValue('gender', value as 'Male' | 'Female')}
@@ -394,7 +394,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                     </div>
 
                     <div>
-                      <Label htmlFor="spouseName">Name of Spouse (If Married)</Label>
+                      <Label htmlFor="spouseName" className="font-bold">Name of Spouse (If Married)</Label>
                       <Input
                         id="spouseName"
                         {...form.register('spouseName')}
@@ -408,7 +408,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                     </div>
 
                     <div>
-                      <Label htmlFor="panNumber">PAN Number *</Label>
+                      <Label htmlFor="panNumber" className="font-bold">PAN Number *</Label>
                       <Input
                         id="panNumber"
                         {...form.register('panNumber')}
@@ -429,7 +429,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                     </div>
 
                     <div>
-                      <Label htmlFor="aadhaar">Aadhaar Number *</Label>
+                      <Label htmlFor="aadhaar" className="font-bold">Aadhaar Number *</Label>
                       <Input
                         id="aadhaar"
                         {...form.register('aadhaar')}
@@ -451,7 +451,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <Label htmlFor="joiningDate">Date of Joining into Service *</Label>
+                      <Label htmlFor="joiningDate" className="font-bold">Date of Joining into Service *</Label>
                       <Input
                         id="joiningDate"
                         type="date"
@@ -464,7 +464,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                     </div>
 
                     <div>
-                      <Label htmlFor="designation">Current Designation *</Label>
+                      <Label htmlFor="designation" className="font-bold">Current Designation *</Label>
                       <Input
                         id="designation"
                         {...form.register('designation')}
@@ -480,7 +480,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                   </div>
 
                   <div>
-                    <Label htmlFor="address">Permanent Residential Address *</Label>
+                    <Label htmlFor="address" className="font-bold">Permanent Residential Address *</Label>
                     <Textarea
                       id="address"
                       {...form.register('address')}
@@ -497,7 +497,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <Label htmlFor="directorate">Working Directorate *</Label>
+                      <Label htmlFor="directorate" className="font-bold">Working Directorate *</Label>
                       <Input
                         id="directorate"
                         {...form.register('directorate')}
@@ -512,7 +512,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                     </div>
 
                     <div>
-                      <Label htmlFor="workingStation">Current Working Station *</Label>
+                      <Label htmlFor="workingStation" className="font-bold">Current Working Station *</Label>
                       <Input
                         id="workingStation"
                         {...form.register('workingStation')}
@@ -527,7 +527,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                     </div>
 
                     <div>
-                      <Label htmlFor="district">Current Working District *</Label>
+                      <Label htmlFor="district" className="font-bold">Current Working District *</Label>
                       <Select
                         value={form.watch('district')}
                         onValueChange={(value) => form.setValue('district', value)}
@@ -550,7 +550,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                   </div>
 
                   <div>
-                    <Label>Membership Type *</Label>
+                    <Label className="font-bold">Membership Type *</Label>
                     <RadioGroup
                       value={form.watch('membershipType')}
                       onValueChange={(value) => form.setValue('membershipType', value as any)}
