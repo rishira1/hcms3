@@ -131,9 +131,11 @@ export function TrackingModal({ open, onOpenChange }: TrackingModalProps) {
             <Input
               value={trackingNumber}
               onChange={(e) => setTrackingNumber(e.target.value)}
-              placeholder="Enter tracking number (e.g., HCMS-2024-001234)"
+              placeholder="Enter tracking number (e.g., HCMS-2025-001234)"
               className="flex-1"
               required
+              onFocus={(e) => e.target.placeholder = ''}
+              onBlur={(e) => e.target.placeholder = 'Enter tracking number (e.g., HCMS-2025-001234)'}
             />
             <Button 
               type="submit" 

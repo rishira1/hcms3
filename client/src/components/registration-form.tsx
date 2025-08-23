@@ -306,9 +306,11 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       <Input
                         id="name"
                         {...form.register('name')}
-                        placeholder="Name followed by Initial (no prefix Dr, no space/comma)"
+                        placeholder="Enter your full name (e.g., John A)"
+                        onFocus={(e) => e.target.placeholder = ''}
+                        onBlur={(e) => e.target.placeholder = 'Enter your full name (e.g., John A)'}
                       />
-                      <p className="text-xs text-gray-500 mt-1">Format: John A (no prefix, no comma)</p>
+                      <p className="text-xs text-gray-500 mt-1">Format: Name followed by Initial (no prefix Dr, no space/comma)</p>
                       {form.formState.errors.name && (
                         <p className="text-sm text-red-600">{form.formState.errors.name.message}</p>
                       )}
@@ -320,7 +322,9 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         id="email"
                         type="email"
                         {...form.register('email')}
-                        placeholder="your.email@domain.com"
+                        placeholder="Enter your email address"
+                        onFocus={(e) => e.target.placeholder = ''}
+                        onBlur={(e) => e.target.placeholder = 'Enter your email address'}
                       />
                       {form.formState.errors.email && (
                         <p className="text-sm text-red-600">{form.formState.errors.email.message}</p>
@@ -332,7 +336,9 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       <Input
                         id="qualification"
                         {...form.register('qualification')}
-                        placeholder="MBBS DTD MD RESPIRATORY MEDICINE"
+                        placeholder="Enter your qualification (e.g., MBBS MD)"
+                        onFocus={(e) => e.target.placeholder = ''}
+                        onBlur={(e) => e.target.placeholder = 'Enter your qualification (e.g., MBBS MD)'}
                       />
                       <p className="text-xs text-gray-500 mt-1">No full stops or commas</p>
                       {form.formState.errors.qualification && (
@@ -376,8 +382,10 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       <Input
                         id="aadhaar"
                         {...form.register('aadhaar')}
-                        placeholder="1234 5678 9012"
+                        placeholder="Enter 12-digit Aadhaar number"
                         maxLength={14}
+                        onFocus={(e) => e.target.placeholder = ''}
+                        onBlur={(e) => e.target.placeholder = 'Enter 12-digit Aadhaar number'}
                         onChange={(e) => {
                           const formatted = formatAadhaar(e.target.value);
                           form.setValue('aadhaar', formatted);
@@ -407,7 +415,9 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       <Input
                         id="designation"
                         {...form.register('designation')}
-                        placeholder="Senior Medical Officer"
+                        placeholder="Enter your current designation"
+                        onFocus={(e) => e.target.placeholder = ''}
+                        onBlur={(e) => e.target.placeholder = 'Enter your current designation'}
                       />
                       {form.formState.errors.designation && (
                         <p className="text-sm text-red-600">{form.formState.errors.designation.message}</p>
@@ -422,6 +432,8 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       {...form.register('address')}
                       placeholder="Enter your complete permanent address"
                       rows={3}
+                      onFocus={(e) => e.target.placeholder = ''}
+                      onBlur={(e) => e.target.placeholder = 'Enter your complete permanent address'}
                     />
                     {form.formState.errors.address && (
                       <p className="text-sm text-red-600">{form.formState.errors.address.message}</p>
@@ -457,7 +469,9 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         <Input
                           id="otherDirectorate"
                           {...form.register('otherDirectorate')}
-                          placeholder="Please specify"
+                          placeholder="Please specify your directorate"
+                          onFocus={(e) => e.target.placeholder = ''}
+                          onBlur={(e) => e.target.placeholder = 'Please specify your directorate'}
                         />
                         {form.formState.errors.otherDirectorate && (
                           <p className="text-sm text-red-600">{form.formState.errors.otherDirectorate.message}</p>
@@ -470,7 +484,9 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       <Input
                         id="workingStation"
                         {...form.register('workingStation')}
-                        placeholder="Hospital/Clinic Name"
+                        placeholder="Enter hospital/clinic name"
+                        onFocus={(e) => e.target.placeholder = ''}
+                        onBlur={(e) => e.target.placeholder = 'Enter hospital/clinic name'}
                       />
                       {form.formState.errors.workingStation && (
                         <p className="text-sm text-red-600">{form.formState.errors.workingStation.message}</p>

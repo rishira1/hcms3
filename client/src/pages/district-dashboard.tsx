@@ -294,6 +294,8 @@ export default function DistrictDashboard() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full"
+                  onFocus={(e) => e.target.placeholder = ''}
+                  onBlur={(e) => e.target.placeholder = 'Search by name, email, or tracking number'}
                 />
               </div>
 
