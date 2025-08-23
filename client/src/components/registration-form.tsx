@@ -263,31 +263,28 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
     <>
       <script src="https://checkout.razorpay.com/v1/checkout.js" />
       
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Progress Indicator */}
-        <div className="mb-8 sm:mb-12">
-          <div className="flex items-center justify-center overflow-x-auto pb-4">
-            <div className="flex items-center space-x-4 sm:space-x-8 min-w-max">
+        <div className="mb-8">
+          <div className="flex items-center justify-center">
+            <div className="flex items-center space-x-4">
               {[1, 2, 3].map((step) => (
                 <div key={step} className="flex items-center">
-                  <div className={`relative w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center text-xs sm:text-sm font-semibold transition-all duration-300 ${
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
                     step <= currentStep 
-                      ? 'bg-primary text-primary-foreground shadow-lg' 
-                      : 'bg-muted text-muted-foreground'
+                      ? 'bg-primary text-white' 
+                      : 'bg-gray-300 text-gray-500'
                   }`}>
                     {step}
-                    {step <= currentStep && (
-                      <div className="absolute inset-0 rounded-xl bg-primary/20 animate-pulse" />
-                    )}
                   </div>
-                  <span className={`ml-2 sm:ml-3 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${
-                    step <= currentStep ? 'text-foreground' : 'text-muted-foreground'
+                  <span className={`ml-2 text-sm font-medium ${
+                    step <= currentStep ? 'text-primary' : 'text-gray-500'
                   }`}>
-                    {step === 1 ? 'Personal' : step === 2 ? 'Documents' : 'Payment'}
+                    {step === 1 ? 'Personal Info' : step === 2 ? 'Documents' : 'Payment'}
                   </span>
                   {step < 3 && (
-                    <div className={`w-12 sm:w-20 h-0.5 ml-3 sm:ml-6 rounded-full transition-all duration-500 ${
-                      step < currentStep ? 'bg-primary' : 'bg-muted'
+                    <div className={`w-16 h-0.5 ml-4 ${
+                      step < currentStep ? 'bg-primary' : 'bg-gray-300'
                     }`} />
                   )}
                 </div>
@@ -296,94 +293,83 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
           </div>
         </div>
 
-        <div className="premium-card p-4 sm:p-6 lg:p-8 scale-in">
-          {currentStep === 1 && (
-            <div className="fade-in">
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-6 sm:mb-8">Personal Information</h2>
-              
-              <div className="space-y-6 sm:space-y-8">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-                  <div className="space-y-2">
-                    <Label htmlFor="name" className="text-sm font-medium text-foreground">Full Name *</Label>
-                    <Input
-                      id="name"
-                      {...form.register('name')}
-                      placeholder="John A"
-                      className="premium-input h-11 sm:h-12"
-                      data-testid="input-name"
-                    />
-                    <p className="text-xs text-muted-foreground">Format: Name followed by initial (no prefix)</p>
-                    {form.formState.errors.name && (
-                      <p className="text-sm text-destructive animate-in fade-in slide-in-from-top-2">{form.formState.errors.name.message}</p>
-                    )}
-                  </div>
+        <Card>
+          <CardContent className="p-8">
+            {currentStep === 1 && (
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-6">Personal Information</h2>
+                
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="name">Full Name *</Label>
+                      <Input
+                        id="name"
+                        {...form.register('name')}
+                        placeholder="Name followed by Initial (no prefix Dr, no space/comma)"
+                      />
+                      <p className="text-xs text-gray-500 mt-1">Format: John A (no prefix, no comma)</p>
+                      {form.formState.errors.name && (
+                        <p className="text-sm text-red-600">{form.formState.errors.name.message}</p>
+                      )}
+                    </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="text-sm font-medium text-foreground">Email Address *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      {...form.register('email')}
-                      placeholder="john@email.com"
-                      className="premium-input h-11 sm:h-12"
-                      data-testid="input-email"
-                    />
-                    {form.formState.errors.email && (
-                      <p className="text-sm text-destructive animate-in fade-in slide-in-from-top-2">{form.formState.errors.email.message}</p>
-                    )}
-                  </div>
+                    <div>
+                      <Label htmlFor="email">Email Address *</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        {...form.register('email')}
+                        placeholder="your.email@domain.com"
+                      />
+                      {form.formState.errors.email && (
+                        <p className="text-sm text-red-600">{form.formState.errors.email.message}</p>
+                      )}
+                    </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="qualification" className="text-sm font-medium text-foreground">Qualification *</Label>
-                    <Input
-                      id="qualification"
-                      {...form.register('qualification')}
-                      placeholder="MBBS MD RESPIRATORY MEDICINE"
-                      className="premium-input h-11 sm:h-12"
-                      data-testid="input-qualification"
-                    />
-                    <p className="text-xs text-muted-foreground">No periods or commas</p>
-                    {form.formState.errors.qualification && (
-                      <p className="text-sm text-destructive animate-in fade-in slide-in-from-top-2">{form.formState.errors.qualification.message}</p>
-                    )}
-                  </div>
+                    <div>
+                      <Label htmlFor="qualification">Qualification *</Label>
+                      <Input
+                        id="qualification"
+                        {...form.register('qualification')}
+                        placeholder="MBBS DTD MD RESPIRATORY MEDICINE"
+                      />
+                      <p className="text-xs text-gray-500 mt-1">No full stops or commas</p>
+                      {form.formState.errors.qualification && (
+                        <p className="text-sm text-red-600">{form.formState.errors.qualification.message}</p>
+                      )}
+                    </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="dob" className="text-sm font-medium text-foreground">Date of Birth *</Label>
-                    <Input
-                      id="dob"
-                      type="date"
-                      {...form.register('dob')}
-                      className="premium-input h-11 sm:h-12"
-                      data-testid="input-dob"
-                    />
-                    {form.formState.errors.dob && (
-                      <p className="text-sm text-destructive animate-in fade-in slide-in-from-top-2">{form.formState.errors.dob.message}</p>
-                    )}
-                  </div>
+                    <div>
+                      <Label htmlFor="dob">Date of Birth *</Label>
+                      <Input
+                        id="dob"
+                        type="date"
+                        {...form.register('dob')}
+                      />
+                      {form.formState.errors.dob && (
+                        <p className="text-sm text-red-600">{form.formState.errors.dob.message}</p>
+                      )}
+                    </div>
 
-                  <div className="space-y-2 lg:col-span-2">
-                    <Label className="text-sm font-medium text-foreground">Gender *</Label>
-                    <RadioGroup
-                      value={form.watch('gender')}
-                      onValueChange={(value) => form.setValue('gender', value as 'Male' | 'Female')}
-                      className="flex space-x-6 mt-3"
-                    >
-                      {GENDER_OPTIONS.map((option) => (
-                        <div key={option.value} className="flex items-center space-x-2">
-                          <RadioGroupItem 
-                            value={option.value} 
-                            id={option.value}
-                            className="border-border data-[state=checked]:border-primary data-[state=checked]:bg-primary"
-                          />
-                          <Label htmlFor={option.value} className="text-sm cursor-pointer">{option.label}</Label>
-                        </div>
-                      ))}
-                    </RadioGroup>
-                    {form.formState.errors.gender && (
-                      <p className="text-sm text-destructive animate-in fade-in slide-in-from-top-2">{form.formState.errors.gender.message}</p>
-                    )}
-                  </div>
+                    <div>
+                      <Label>Gender *</Label>
+                      <RadioGroup
+                        value={form.watch('gender')}
+                        onValueChange={(value) => form.setValue('gender', value as 'Male' | 'Female')}
+                        className="flex space-x-6 mt-2"
+                      >
+                        {GENDER_OPTIONS.map((option) => (
+                          <div key={option.value} className="flex items-center space-x-2">
+                            <RadioGroupItem value={option.value} id={option.value} />
+                            <Label htmlFor={option.value}>{option.label}</Label>
+                          </div>
+                        ))}
+                      </RadioGroup>
+                      {form.formState.errors.gender && (
+                        <p className="text-sm text-red-600">{form.formState.errors.gender.message}</p>
+                      )}
+                    </div>
 
                     <div>
                       <Label htmlFor="aadhaar">Aadhaar Number *</Label>
@@ -672,7 +658,8 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                 </div>
               </div>
             )}
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </>
   );
