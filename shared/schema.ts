@@ -27,8 +27,7 @@ export const members = pgTable("members", {
   
   // Work Information
   designation: text("designation").notNull(),
-  directorate: directorateEnum("directorate").notNull(),
-  otherDirectorate: text("other_directorate"),
+  directorate: text("directorate").notNull(),
   workingStation: text("working_station").notNull(),
   district: text("district").notNull(),
   

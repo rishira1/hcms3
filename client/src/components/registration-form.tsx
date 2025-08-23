@@ -26,7 +26,6 @@ const formSchema = z.object({
   name: z.string().min(1, 'Name is required').regex(/^[A-Za-z\s]+$/, 'Name should contain only letters and spaces'),
   email: z.string().email('Invalid email format'),
   qualification: z.string().min(1, 'Qualification is required'),
-  otherQualification: z.string().optional(),
   dob: z.string().min(1, 'Date of birth is required'),
   gender: z.enum(['Male', 'Female'], { required_error: 'Please select gender' }),
   spouseName: z.string().optional(),
@@ -35,9 +34,7 @@ const formSchema = z.object({
   joiningDate: z.string().min(1, 'Joining date is required'),
   address: z.string().min(1, 'Address is required'),
   designation: z.string().min(1, 'Designation is required'),
-  otherDesignation: z.string().optional(),
-  directorate: z.enum(['DGHS', 'DME', 'DMRHS', 'DPH&PM', 'DFWS', 'AYUSH', 'ESI', 'CGHS', 'Railways', 'Defence', 'DRDO', 'AIIMS', 'PGI', 'GMCH', 'District Hospital', 'CHC', 'PHC', 'Sub Centre', 'Urban Health', 'NRHM', 'Private Sector', 'NGO', 'Other'], { required_error: 'Please select directorate' }),
-  otherDirectorate: z.string().optional(),
+  directorate: z.string().min(1, 'Directorate is required'),
   workingStation: z.string().min(1, 'Working station is required'),
   district: z.string().min(1, 'District is required'),
   membershipType: z.enum(['New Membership', 'Annual Subscription fee'], { required_error: 'Please select membership type' })
@@ -336,41 +333,17 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
 
                     <div>
                       <Label htmlFor="qualification">Medical Qualification *</Label>
-                      <Select
-                        value={form.watch('qualification')}
-                        onValueChange={(value) => form.setValue('qualification', value)}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your medical qualification (e.g., MBBS, MBBS MD)" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {QUALIFICATIONS.map((option) => (
-                            <SelectItem key={option.value} value={option.value}>
-                              {option.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <Input
+                        id="qualification"
+                        {...form.register('qualification')}
+                        placeholder="Enter your medical qualification (e.g., MBBS, MBBS MD)"
+                        onFocus={(e) => e.target.placeholder = ''}
+                        onBlur={(e) => e.target.placeholder = 'Enter your medical qualification (e.g., MBBS, MBBS MD)'}
+                      />
                       {form.formState.errors.qualification && (
                         <p className="text-sm text-red-600">{form.formState.errors.qualification.message}</p>
                       )}
                     </div>
-
-                    {form.watch('qualification') === 'Other' && (
-                      <div>
-                        <Label htmlFor="otherQualification">Specify Other Qualification *</Label>
-                        <Input
-                          id="otherQualification"
-                          {...form.register('otherQualification')}
-                          placeholder="Please specify your medical qualification"
-                          onFocus={(e) => e.target.placeholder = ''}
-                          onBlur={(e) => e.target.placeholder = 'Please specify your medical qualification'}
-                        />
-                        {form.formState.errors.otherQualification && (
-                          <p className="text-sm text-red-600">{form.formState.errors.otherQualification.message}</p>
-                        )}
-                      </div>
-                    )}
 
                     <div>
                       <Label htmlFor="dob">Date of Birth *</Label>
@@ -472,41 +445,17 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
 
                     <div>
                       <Label htmlFor="designation">Current Designation *</Label>
-                      <Select
-                        value={form.watch('designation')}
-                        onValueChange={(value) => form.setValue('designation', value)}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your current designation (e.g., Medical Officer)" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {DESIGNATIONS.map((option) => (
-                            <SelectItem key={option.value} value={option.value}>
-                              {option.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <Input
+                        id="designation"
+                        {...form.register('designation')}
+                        placeholder="Enter your current designation (e.g., Medical Officer)"
+                        onFocus={(e) => e.target.placeholder = ''}
+                        onBlur={(e) => e.target.placeholder = 'Enter your current designation (e.g., Medical Officer)'}
+                      />
                       {form.formState.errors.designation && (
                         <p className="text-sm text-red-600">{form.formState.errors.designation.message}</p>
                       )}
                     </div>
-
-                    {form.watch('designation') === 'Other' && (
-                      <div>
-                        <Label htmlFor="otherDesignation">Specify Other Designation *</Label>
-                        <Input
-                          id="otherDesignation"
-                          {...form.register('otherDesignation')}
-                          placeholder="Please specify your designation"
-                          onFocus={(e) => e.target.placeholder = ''}
-                          onBlur={(e) => e.target.placeholder = 'Please specify your designation'}
-                        />
-                        {form.formState.errors.otherDesignation && (
-                          <p className="text-sm text-red-600">{form.formState.errors.otherDesignation.message}</p>
-                        )}
-                      </div>
-                    )}
                   </div>
 
                   <div>
@@ -527,41 +476,17 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <Label htmlFor="directorate">Working Directorate *</Label>
-                      <Select
-                        value={form.watch('directorate')}
-                        onValueChange={(value) => form.setValue('directorate', value as any)}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your working directorate (e.g., DMRHS, ESI)" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {DIRECTORATES.map((option) => (
-                            <SelectItem key={option.value} value={option.value}>
-                              {option.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <Input
+                        id="directorate"
+                        {...form.register('directorate')}
+                        placeholder="Enter your working directorate (e.g., DMRHS, ESI)"
+                        onFocus={(e) => e.target.placeholder = ''}
+                        onBlur={(e) => e.target.placeholder = 'Enter your working directorate (e.g., DMRHS, ESI)'}
+                      />
                       {form.formState.errors.directorate && (
                         <p className="text-sm text-red-600">{form.formState.errors.directorate.message}</p>
                       )}
                     </div>
-
-                    {form.watch('directorate') === 'Other' && (
-                      <div>
-                        <Label htmlFor="otherDirectorate">Specify Other Directorate *</Label>
-                        <Input
-                          id="otherDirectorate"
-                          {...form.register('otherDirectorate')}
-                          placeholder="Please specify your directorate"
-                          onFocus={(e) => e.target.placeholder = ''}
-                          onBlur={(e) => e.target.placeholder = 'Please specify your directorate'}
-                        />
-                        {form.formState.errors.otherDirectorate && (
-                          <p className="text-sm text-red-600">{form.formState.errors.otherDirectorate.message}</p>
-                        )}
-                      </div>
-                    )}
 
                     <div>
                       <Label htmlFor="workingStation">Current Working Station *</Label>
