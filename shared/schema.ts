@@ -19,6 +19,8 @@ export const members = pgTable("members", {
   qualification: text("qualification").notNull(),
   dob: date("dob").notNull(),
   gender: genderEnum("gender").notNull(),
+  spouseName: text("spouse_name"),
+  panNumber: varchar("pan_number", { length: 10 }).notNull(),
   aadhaar: varchar("aadhaar", { length: 14 }).notNull(),
   joiningDate: date("joining_date").notNull(),
   address: text("address").notNull(),

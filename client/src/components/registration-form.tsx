@@ -29,6 +29,8 @@ const formSchema = z.object({
   otherQualification: z.string().optional(),
   dob: z.string().min(1, 'Date of birth is required'),
   gender: z.enum(['Male', 'Female'], { required_error: 'Please select gender' }),
+  spouseName: z.string().optional(),
+  panNumber: z.string().min(1, 'PAN Number is required').regex(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, 'PAN should be in format: ABCDE1234F'),
   aadhaar: z.string().regex(/^\d{4}\s\d{4}\s\d{4}$/, 'Aadhaar should be in format: 1234 5678 9012'),
   joiningDate: z.string().min(1, 'Joining date is required'),
   address: z.string().min(1, 'Address is required'),
@@ -399,6 +401,40 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       </RadioGroup>
                       {form.formState.errors.gender && (
                         <p className="text-sm text-red-600">{form.formState.errors.gender.message}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <Label htmlFor="spouseName">Name of Spouse (If Married)</Label>
+                      <Input
+                        id="spouseName"
+                        {...form.register('spouseName')}
+                        placeholder="Enter spouse name if married"
+                        onFocus={(e) => e.target.placeholder = ''}
+                        onBlur={(e) => e.target.placeholder = 'Enter spouse name if married'}
+                      />
+                      {form.formState.errors.spouseName && (
+                        <p className="text-sm text-red-600">{form.formState.errors.spouseName.message}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <Label htmlFor="panNumber">PAN Number *</Label>
+                      <Input
+                        id="panNumber"
+                        {...form.register('panNumber')}
+                        placeholder="Enter 10-character PAN number"
+                        maxLength={10}
+                        onFocus={(e) => e.target.placeholder = ''}
+                        onBlur={(e) => e.target.placeholder = 'Enter 10-character PAN number'}
+                        onChange={(e) => {
+                          const value = e.target.value.toUpperCase();
+                          form.setValue('panNumber', value);
+                        }}
+                      />
+                      <p className="text-xs text-gray-500 mt-1">Format: ABCDE1234F</p>
+                      {form.formState.errors.panNumber && (
+                        <p className="text-sm text-red-600">{form.formState.errors.panNumber.message}</p>
                       )}
                     </div>
 
