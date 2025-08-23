@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom placeholder styling */
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af !important; /* Light gray color */
+  font-style: italic !important;
+  opacity: 1 !important; /* Ensure visibility across browsers */
+}
+
+/* Firefox placeholder styling */
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: #9ca3af !important;
+  font-style: italic !important;
+  opacity: 1 !important;
+}
+
+/* WebKit browsers placeholder styling */
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #9ca3af !important;
+  font-style: italic !important;
+  opacity: 1 !important;
+}
+
+/* Microsoft Edge placeholder styling */
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
+  color: #9ca3af !important;
+  font-style: italic !important;
+  opacity: 1 !important;
+}
+
 :root {
   --background: hsl(0 0% 100%);
   --foreground: hsl(210 25% 7.8431%);
