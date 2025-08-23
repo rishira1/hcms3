@@ -72,8 +72,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
       joiningDate: '',
       address: '',
       designation: '',
-      directorate: undefined,
-      otherDirectorate: '',
+      directorate: '',
       workingStation: '',
       district: '',
       membershipType: undefined
@@ -211,9 +210,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
       }
     });
 
-    if (values.directorate === 'Other' && !values.otherDirectorate) {
-      errors.push('otherDirectorate');
-    }
+
 
     if (errors.length > 0) {
       toast({

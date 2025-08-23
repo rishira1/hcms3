@@ -17,7 +17,7 @@ export function Navbar() {
             <div className="flex items-center">
               <Link href="/" className="flex-shrink-0 flex items-center">
                 <Heart className="h-8 w-8 text-primary mr-3" />
-                <h1 className="text-xl font-semibold text-gray-900">HCMS Registration</h1>
+                <h1 className="text-xl font-semibold text-gray-900">HCMS Association</h1>
               </Link>
             </div>
             <div className="flex items-center space-x-4">
