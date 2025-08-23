@@ -310,11 +310,10 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       <Input
                         id="name"
                         {...form.register('name')}
-                        placeholder="Enter your full name (e.g., John A)"
+                        placeholder="Enter your full name"
                         onFocus={(e) => e.target.placeholder = ''}
-                        onBlur={(e) => e.target.placeholder = 'Enter your full name (e.g., John A)'}
+                        onBlur={(e) => e.target.placeholder = 'Enter your full name'}
                       />
-                      <p className="text-xs text-gray-500 mt-1">Format: Name followed by Initial (no prefix Dr, no space/comma)</p>
                       {form.formState.errors.name && (
                         <p className="text-sm text-red-600">{form.formState.errors.name.message}</p>
                       )}
