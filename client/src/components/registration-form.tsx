@@ -196,23 +196,29 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
   };
 
   const validateStep1 = () => {
-    const fields = [
-      'name', 'email', 'qualification', 'dob', 'gender', 'aadhaar',
+    const requiredFields = [
+      'name', 'email', 'qualification', 'dob', 'gender', 'panNumber', 'aadhaar',
       'joiningDate', 'address', 'designation', 'directorate', 'workingStation', 'district', 'membershipType'
     ];
     
     const values = form.getValues();
-    const errors: string[] = [];
+    let hasErrors = false;
     
-    fields.forEach(field => {
-      if (!values[field as keyof FormData]) {
-        errors.push(field);
+    // Clear previous errors
+    form.clearErrors();
+    
+    requiredFields.forEach(field => {
+      const value = values[field as keyof FormData];
+      if (!value || (typeof value === 'string' && value.trim() === '')) {
+        form.setError(field as any, { 
+          type: 'required', 
+          message: 'This field is required' 
+        });
+        hasErrors = true;
       }
     });
 
-
-
-    if (errors.length > 0) {
+    if (hasErrors) {
       toast({
         title: 'Please fill in all required fields',
         description: 'All fields marked with * are mandatory',
@@ -307,6 +313,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         placeholder="Enter your full name"
                         onFocus={(e) => e.target.placeholder = ''}
                         onBlur={(e) => e.target.placeholder = 'Enter your full name'}
+                        className={form.formState.errors.name ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
                       />
                       {form.formState.errors.name && (
                         <p className="text-sm text-red-600">{form.formState.errors.name.message}</p>
@@ -322,6 +329,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         placeholder="Enter your email address"
                         onFocus={(e) => e.target.placeholder = ''}
                         onBlur={(e) => e.target.placeholder = 'Enter your email address'}
+                        className={form.formState.errors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
                       />
                       {form.formState.errors.email && (
                         <p className="text-sm text-red-600">{form.formState.errors.email.message}</p>
@@ -336,6 +344,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         placeholder="Enter your medical qualification (e.g., MBBS, MBBS MD)"
                         onFocus={(e) => e.target.placeholder = ''}
                         onBlur={(e) => e.target.placeholder = 'Enter your medical qualification (e.g., MBBS, MBBS MD)'}
+                        className={form.formState.errors.qualification ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
                       />
                       {form.formState.errors.qualification && (
                         <p className="text-sm text-red-600">{form.formState.errors.qualification.message}</p>
@@ -348,6 +357,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         id="dob"
                         type="date"
                         {...form.register('dob')}
+                        className={form.formState.errors.dob ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
                       />
                       {form.formState.errors.dob && (
                         <p className="text-sm text-red-600">{form.formState.errors.dob.message}</p>
@@ -400,6 +410,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                           const value = e.target.value.toUpperCase();
                           form.setValue('panNumber', value);
                         }}
+                        className={form.formState.errors.panNumber ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
                       />
                       <p className="text-xs text-gray-500 mt-1">Format: ABCDE1234F</p>
                       {form.formState.errors.panNumber && (
@@ -420,6 +431,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                           const formatted = formatAadhaar(e.target.value);
                           form.setValue('aadhaar', formatted);
                         }}
+                        className={form.formState.errors.aadhaar ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
                       />
                       {form.formState.errors.aadhaar && (
                         <p className="text-sm text-red-600">{form.formState.errors.aadhaar.message}</p>
@@ -434,6 +446,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         id="joiningDate"
                         type="date"
                         {...form.register('joiningDate')}
+                        className={form.formState.errors.joiningDate ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
                       />
                       {form.formState.errors.joiningDate && (
                         <p className="text-sm text-red-600">{form.formState.errors.joiningDate.message}</p>
@@ -448,6 +461,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         placeholder="Enter your current designation (e.g., Medical Officer)"
                         onFocus={(e) => e.target.placeholder = ''}
                         onBlur={(e) => e.target.placeholder = 'Enter your current designation (e.g., Medical Officer)'}
+                        className={form.formState.errors.designation ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
                       />
                       {form.formState.errors.designation && (
                         <p className="text-sm text-red-600">{form.formState.errors.designation.message}</p>
@@ -464,6 +478,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       rows={3}
                       onFocus={(e) => e.target.placeholder = ''}
                       onBlur={(e) => e.target.placeholder = 'Enter your complete permanent address'}
+                      className={form.formState.errors.address ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
                     />
                     {form.formState.errors.address && (
                       <p className="text-sm text-red-600">{form.formState.errors.address.message}</p>
@@ -479,6 +494,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         placeholder="Enter your working directorate (e.g., DMRHS, ESI)"
                         onFocus={(e) => e.target.placeholder = ''}
                         onBlur={(e) => e.target.placeholder = 'Enter your working directorate (e.g., DMRHS, ESI)'}
+                        className={form.formState.errors.directorate ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
                       />
                       {form.formState.errors.directorate && (
                         <p className="text-sm text-red-600">{form.formState.errors.directorate.message}</p>
@@ -493,6 +509,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         placeholder="Enter hospital/clinic name"
                         onFocus={(e) => e.target.placeholder = ''}
                         onBlur={(e) => e.target.placeholder = 'Enter hospital/clinic name'}
+                        className={form.formState.errors.workingStation ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
                       />
                       {form.formState.errors.workingStation && (
                         <p className="text-sm text-red-600">{form.formState.errors.workingStation.message}</p>
