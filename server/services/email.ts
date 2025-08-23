@@ -45,14 +45,14 @@ export async function sendRegistrationConfirmation(email: string, name: string, 
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <div style="background: linear-gradient(135deg, #2563eb, #0891b2); padding: 30px; text-align: center;">
-        <h1 style="color: white; margin: 0; font-size: 24px;">HCMS Registration Confirmation</h1>
+        <h1 style="color: white; margin: 0; font-size: 24px;">HCMSA Registration Confirmation</h1>
       </div>
       
       <div style="padding: 30px; background: white; border: 1px solid #e5e7eb;">
         <h2 style="color: #1f2937; margin-bottom: 20px;">Dear ${name},</h2>
         
         <p style="color: #4b5563; line-height: 1.6; margin-bottom: 20px;">
-          Your HCMS membership application has been successfully submitted and payment has been confirmed.
+          Your HCMSA membership application has been successfully submitted and payment has been confirmed.
         </p>
         
         <div style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;">
@@ -74,13 +74,13 @@ export async function sendRegistrationConfirmation(email: string, name: string, 
         </div>
         
         <p style="color: #6b7280; font-size: 14px; margin-top: 30px;">
-          For support, contact us at support@hcms.gov.in or call +91-471-xxx-xxxx
+          For support, contact us at support@hcmsa.gov.in or call +91-172-xxx-xxxx
         </p>
       </div>
       
       <div style="background: #f9fafb; padding: 20px; text-align: center; border-top: 1px solid #e5e7eb;">
         <p style="color: #6b7280; font-size: 12px; margin: 0;">
-          Healthcare Management System © 2024
+          Haryana Civil Medical Services Association © 2024
         </p>
       </div>
     </div>
@@ -89,8 +89,8 @@ export async function sendRegistrationConfirmation(email: string, name: string, 
   console.log('Sending registration confirmation to:', email);
   const result = await sendEmail({
     to: email,
-    from: process.env.RESEND_FROM_EMAIL || 'HCMS <noreply@hcms.gov.in>',
-    subject: 'HCMS Membership Application Confirmation',
+    from: process.env.RESEND_FROM_EMAIL || 'HCMSA <noreply@hcmsa.gov.in>',
+    subject: 'HCMSA Membership Application Confirmation',
     html,
   });
   console.log('Registration confirmation sent result:', result);
@@ -113,7 +113,7 @@ export async function sendApprovalNotification(email: string, name: string, memb
         <h2 style="color: #1f2937; margin-bottom: 20px;">Congratulations ${name}!</h2>
         
         <p style="color: #4b5563; line-height: 1.6; margin-bottom: 20px;">
-          Your HCMS membership application has been approved. Welcome to the Healthcare Management System!
+          Your HCMSA membership application has been approved. Welcome to the Haryana Civil Medical Services Association!
         </p>
         
         <div style="background: #f0fdf4; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #16a34a;">
@@ -133,13 +133,13 @@ export async function sendApprovalNotification(email: string, name: string, memb
         </div>
         
         <p style="color: #6b7280; font-size: 14px; margin-top: 30px;">
-          Thank you for being part of the Healthcare Management System.
+          Thank you for being part of the Haryana Civil Medical Services Association.
         </p>
       </div>
       
       <div style="background: #f9fafb; padding: 20px; text-align: center; border-top: 1px solid #e5e7eb;">
         <p style="color: #6b7280; font-size: 12px; margin: 0;">
-          Healthcare Management System © 2024
+          Haryana Civil Medical Services Association © 2024
         </p>
       </div>
     </div>
@@ -152,8 +152,8 @@ export async function sendApprovalNotification(email: string, name: string, memb
     
     const result = await resend.emails.send({
       to: [email],
-      from: process.env.RESEND_FROM_EMAIL || 'HCMS <noreply@hcms.gov.in>',
-      subject: 'HCMS Membership Approved - ID Card Attached',
+      from: process.env.RESEND_FROM_EMAIL || 'HCMSA <noreply@hcmsa.gov.in>',
+      subject: 'HCMSA Membership Approved - ID Card Attached',
       html,
       attachments,
     });
@@ -178,7 +178,7 @@ export async function sendRejectionNotification(email: string, name: string, rea
         <h2 style="color: #1f2937; margin-bottom: 20px;">Dear ${name},</h2>
         
         <p style="color: #4b5563; line-height: 1.6; margin-bottom: 20px;">
-          We regret to inform you that your HCMS membership application could not be approved at this time.
+          We regret to inform you that your HCMSA membership application could not be approved at this time.
         </p>
         
         <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 20px; border-radius: 8px; margin: 20px 0;">
@@ -198,13 +198,13 @@ export async function sendRejectionNotification(email: string, name: string, rea
         </div>
         
         <p style="color: #6b7280; font-size: 14px; margin-top: 30px;">
-          For support, contact us at support@hcms.gov.in or call +91-471-xxx-xxxx
+          For support, contact us at support@hcmsa.gov.in or call +91-172-xxx-xxxx
         </p>
       </div>
       
       <div style="background: #f9fafb; padding: 20px; text-align: center; border-top: 1px solid #e5e7eb;">
         <p style="color: #6b7280; font-size: 12px; margin: 0;">
-          Healthcare Management System © 2024
+          Haryana Civil Medical Services Association © 2024
         </p>
       </div>
     </div>
@@ -212,8 +212,8 @@ export async function sendRejectionNotification(email: string, name: string, rea
 
   return await sendEmail({
     to: email,
-    from: process.env.RESEND_FROM_EMAIL || 'HCMS <noreply@hcms.gov.in>',
-    subject: 'HCMS Membership Application - Action Required',
+    from: process.env.RESEND_FROM_EMAIL || 'HCMSA <noreply@hcmsa.gov.in>',
+    subject: 'HCMSA Membership Application - Action Required',
     html,
   });
 }

@@ -34,9 +34,9 @@ export async function generateMembershipCard(data: MembershipCardData): Promise<
 
       // Header text
       doc.fillColor('white')
-         .fontSize(14)
+         .fontSize(12)
          .font('Helvetica-Bold')
-         .text('HEALTHCARE MANAGEMENT SYSTEM', 10, 15);
+         .text('HARYANA CIVIL MEDICAL SERVICES ASSOCIATION', 10, 12);
 
       doc.fillColor('white')
          .fontSize(10)

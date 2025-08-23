@@ -19,7 +19,7 @@ export default function Home() {
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-primary to-secondary text-white py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold mb-4">Healthcare Management System</h1>
+          <h1 className="text-4xl font-bold mb-4">Haryana Civil Medical Services Association</h1>
           <p className="text-xl text-primary-foreground/80 mb-8">Professional Membership Registration</p>
           <div className="bg-white/10 rounded-lg p-6 max-w-2xl mx-auto">
             <div className="flex items-center justify-center space-x-8">
