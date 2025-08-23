@@ -263,28 +263,31 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
     <>
       <script src="https://checkout.razorpay.com/v1/checkout.js" />
       
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-4xl mx-auto px-6">
         {/* Progress Indicator */}
-        <div className="mb-8">
+        <div className="mb-12">
           <div className="flex items-center justify-center">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-8">
               {[1, 2, 3].map((step) => (
                 <div key={step} className="flex items-center">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                  <div className={`relative w-10 h-10 rounded-2xl flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
                     step <= currentStep 
-                      ? 'bg-primary text-white' 
-                      : 'bg-gray-300 text-gray-500'
+                      ? 'bg-primary text-primary-foreground shadow-lg' 
+                      : 'bg-muted text-muted-foreground'
                   }`}>
                     {step}
+                    {step <= currentStep && (
+                      <div className="absolute inset-0 rounded-2xl bg-primary/20 animate-pulse" />
+                    )}
                   </div>
-                  <span className={`ml-2 text-sm font-medium ${
-                    step <= currentStep ? 'text-primary' : 'text-gray-500'
+                  <span className={`ml-3 text-sm font-medium transition-colors ${
+                    step <= currentStep ? 'text-foreground' : 'text-muted-foreground'
                   }`}>
-                    {step === 1 ? 'Personal Info' : step === 2 ? 'Documents' : 'Payment'}
+                    {step === 1 ? 'Personal Details' : step === 2 ? 'Document Upload' : 'Payment & Review'}
                   </span>
                   {step < 3 && (
-                    <div className={`w-16 h-0.5 ml-4 ${
-                      step < currentStep ? 'bg-primary' : 'bg-gray-300'
+                    <div className={`w-20 h-0.5 ml-6 rounded-full transition-all duration-500 ${
+                      step < currentStep ? 'bg-primary' : 'bg-muted'
                     }`} />
                   )}
                 </div>
@@ -293,64 +296,71 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
           </div>
         </div>
 
-        <Card>
-          <CardContent className="p-8">
-            {currentStep === 1 && (
-              <div>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-6">Personal Information</h2>
-                
-                <div className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <Label htmlFor="name">Full Name *</Label>
-                      <Input
-                        id="name"
-                        {...form.register('name')}
-                        placeholder="Name followed by Initial (no prefix Dr, no space/comma)"
-                      />
-                      <p className="text-xs text-gray-500 mt-1">Format: John A (no prefix, no comma)</p>
-                      {form.formState.errors.name && (
-                        <p className="text-sm text-red-600">{form.formState.errors.name.message}</p>
-                      )}
-                    </div>
+        <div className="premium-card p-8 scale-in">
+          {currentStep === 1 && (
+            <div className="fade-in">
+              <h2 className="text-3xl font-bold tracking-tight mb-8">Personal Information</h2>
+              
+              <div className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <Label htmlFor="name" className="text-sm font-medium">Full Name *</Label>
+                    <Input
+                      id="name"
+                      {...form.register('name')}
+                      placeholder="Name followed by Initial (no prefix Dr, no space/comma)"
+                      className="premium-input h-12"
+                      data-testid="input-name"
+                    />
+                    <p className="text-xs text-muted-foreground">Format: John A (no prefix, no comma)</p>
+                    {form.formState.errors.name && (
+                      <p className="text-sm text-destructive">{form.formState.errors.name.message}</p>
+                    )}
+                  </div>
 
-                    <div>
-                      <Label htmlFor="email">Email Address *</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        {...form.register('email')}
-                        placeholder="your.email@domain.com"
-                      />
-                      {form.formState.errors.email && (
-                        <p className="text-sm text-red-600">{form.formState.errors.email.message}</p>
-                      )}
-                    </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-sm font-medium">Email Address *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      {...form.register('email')}
+                      placeholder="your.email@domain.com"
+                      className="premium-input h-12"
+                      data-testid="input-email"
+                    />
+                    {form.formState.errors.email && (
+                      <p className="text-sm text-destructive">{form.formState.errors.email.message}</p>
+                    )}
+                  </div>
 
-                    <div>
-                      <Label htmlFor="qualification">Qualification *</Label>
-                      <Input
-                        id="qualification"
-                        {...form.register('qualification')}
-                        placeholder="MBBS DTD MD RESPIRATORY MEDICINE"
-                      />
-                      <p className="text-xs text-gray-500 mt-1">No full stops or commas</p>
-                      {form.formState.errors.qualification && (
-                        <p className="text-sm text-red-600">{form.formState.errors.qualification.message}</p>
-                      )}
-                    </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="qualification" className="text-sm font-medium">Qualification *</Label>
+                    <Input
+                      id="qualification"
+                      {...form.register('qualification')}
+                      placeholder="MBBS DTD MD RESPIRATORY MEDICINE"
+                      className="premium-input h-12"
+                      data-testid="input-qualification"
+                    />
+                    <p className="text-xs text-muted-foreground">No full stops or commas</p>
+                    {form.formState.errors.qualification && (
+                      <p className="text-sm text-destructive">{form.formState.errors.qualification.message}</p>
+                    )}
+                  </div>
 
-                    <div>
-                      <Label htmlFor="dob">Date of Birth *</Label>
-                      <Input
-                        id="dob"
-                        type="date"
-                        {...form.register('dob')}
-                      />
-                      {form.formState.errors.dob && (
-                        <p className="text-sm text-red-600">{form.formState.errors.dob.message}</p>
-                      )}
-                    </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="dob" className="text-sm font-medium">Date of Birth *</Label>
+                    <Input
+                      id="dob"
+                      type="date"
+                      {...form.register('dob')}
+                      className="premium-input h-12"
+                      data-testid="input-dob"
+                    />
+                    {form.formState.errors.dob && (
+                      <p className="text-sm text-destructive">{form.formState.errors.dob.message}</p>
+                    )}
+                  </div>
 
                     <div>
                       <Label>Gender *</Label>
@@ -658,8 +668,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                 </div>
               </div>
             )}
-          </CardContent>
-        </Card>
+        </div>
       </div>
     </>
   );
