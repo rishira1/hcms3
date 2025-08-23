@@ -2,9 +2,9 @@
 
 ## Overview
 
-This is a full-stack web application for Healthcare Management System (HCMS) membership registration. The application provides a complete registration workflow with payment processing, document upload, and multi-level approval system. It includes a user-facing registration portal and separate admin dashboards for District GS and State GS roles to manage the approval process.
+This is a full-stack web application for Healthcare Management System (HCMS) membership registration for Haryana state. The application provides a complete registration workflow with payment processing, document upload, and multi-level approval system. It includes a user-facing registration portal and separate admin dashboards for District GS and State GS roles to manage the approval process.
 
-The system handles membership applications, payment processing, document verification, and generates digital membership cards upon approval. Built with React, Node.js, and PostgreSQL, it provides a professional and secure platform for healthcare professional membership management.
+The system handles membership applications, payment processing, document verification, and generates digital membership cards upon approval. Built with React, Node.js, and PostgreSQL, it provides a professional and secure platform for healthcare professional membership management across all 22 districts of Haryana.
 
 ## User Preferences
 
