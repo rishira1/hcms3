@@ -470,8 +470,8 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                 </div>
 
                 {/* Professional Information Section */}
-                <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
-                  <h3 className="text-lg font-semibold text-green-800 mb-4">Professional Information</h3>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+                  <h3 className="text-lg font-semibold text-blue-800 mb-4">Professional Information</h3>
                   <div className="space-y-6">
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
