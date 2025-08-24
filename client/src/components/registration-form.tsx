@@ -470,8 +470,8 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                 </div>
 
                 {/* Professional Information Section */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-6">Professional Information</h3>
+                <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
+                  <h3 className="text-lg font-semibold text-green-800 mb-4">Professional Information</h3>
                   <div className="space-y-6">
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -584,12 +584,14 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       )}
                     </div>
                   </div>
+                </div>
 
-                <div className="flex justify-end">
-                  <Button onClick={handleNext} className="bg-primary hover:bg-primary/90">
-                    Next: Upload Documents
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  <div className="flex justify-end">
+                    <Button onClick={handleNext} className="bg-primary hover:bg-primary/90">
+                      Next: Upload Documents
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             )}
