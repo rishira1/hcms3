@@ -114,7 +114,7 @@ export function FileUpload({
 
   return (
     <div 
-      className={`border-2 border-dashed rounded-lg p-6 transition-colors ${
+      className={`border-2 border-dashed rounded-lg p-4 sm:p-6 transition-colors ${
         dragOver 
           ? 'border-primary bg-primary/5' 
           : file 
@@ -167,11 +167,12 @@ export function FileUpload({
               <p className="text-xs text-gray-500">Please wait while your file is being processed</p>
             </div>
           ) : (
-            <div className="flex justify-center space-x-2">
+            <div className="flex flex-col sm:flex-row justify-center gap-2 sm:space-x-2">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => fileInputRef.current?.click()}
+                className="w-full sm:w-auto"
               >
                 Change File
               </Button>
@@ -179,6 +180,7 @@ export function FileUpload({
                 variant="outline"
                 size="sm"
                 onClick={removeFile}
+                className="w-full sm:w-auto"
               >
                 <X className="h-4 w-4 mr-1" />
                 Remove
@@ -189,16 +191,16 @@ export function FileUpload({
       ) : (
         // Empty state
         <div className="text-center">
-          <Icon className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 mb-2">
+          <Icon className="h-8 w-8 sm:h-12 sm:w-12 text-gray-400 mx-auto mb-3 sm:mb-4" />
+          <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-2">
             {config.title}{required && '*'}
           </h3>
-          <p className="text-sm text-gray-500 mb-4">
+          <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4 px-2">
             {config.description}
           </p>
           <Button
             onClick={() => fileInputRef.current?.click()}
-            className="bg-primary hover:bg-primary/90"
+            className="bg-primary hover:bg-primary/90 w-full sm:w-auto"
           >
             <Upload className="h-4 w-4 mr-2" />
             Choose File

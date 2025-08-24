@@ -277,27 +277,27 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
     <>
       <script src="https://checkout.razorpay.com/v1/checkout.js" />
       
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-8 lg:py-12">
         {/* Progress Indicator */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <div className="flex items-center justify-center">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               {[1, 2, 3].map((step) => (
                 <div key={step} className="flex items-center">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                  <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs sm:text-sm font-medium ${
                     step <= currentStep 
                       ? 'bg-primary text-white' 
                       : 'bg-gray-300 text-gray-500'
                   }`}>
                     {step}
                   </div>
-                  <span className={`ml-2 text-sm font-medium ${
+                  <span className={`ml-1 sm:ml-2 text-xs sm:text-sm font-medium hidden sm:inline ${
                     step <= currentStep ? 'text-primary' : 'text-gray-500'
                   }`}>
                     {step === 1 ? 'Personal Info' : step === 2 ? 'Documents' : 'Payment'}
                   </span>
                   {step < 3 && (
-                    <div className={`w-16 h-0.5 ml-4 ${
+                    <div className={`w-8 sm:w-16 h-0.5 ml-2 sm:ml-4 ${
                       step < currentStep ? 'bg-primary' : 'bg-gray-300'
                     }`} />
                   )}
@@ -308,17 +308,17 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
         </div>
 
         <Card>
-          <CardContent className="p-8">
+          <CardContent className="p-4 sm:p-6 lg:p-8">
             {currentStep === 1 && (
               <div>
                 {/* Personal Information Section */}
-                <div className="mb-12">
-                  <div className="flex items-center mb-8">
-                    <h3 className="text-xl font-semibold text-gray-800 border-b-2 border-blue-500 pb-2">Personal Information</h3>
+                <div className="mb-8 sm:mb-10 lg:mb-12">
+                  <div className="flex items-center mb-4 sm:mb-6 lg:mb-8">
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-800 border-b-2 border-blue-500 pb-2">Personal Information</h3>
                   </div>
                   
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4 sm:space-y-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                       <div>
                       <Label htmlFor="name" className="font-bold">Full Name *</Label>
                       <Input
@@ -459,13 +459,13 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                 </div>
 
                 {/* Professional Information Section */}
-                <div className="mb-8">
-                  <div className="flex items-center mb-8">
-                    <h3 className="text-xl font-semibold text-gray-800 border-b-2 border-green-500 pb-2">Professional Information</h3>
+                <div className="mb-6 sm:mb-8">
+                  <div className="flex items-center mb-4 sm:mb-6 lg:mb-8">
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-800 border-b-2 border-green-500 pb-2">Professional Information</h3>
                   </div>
                   
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4 sm:space-y-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                       <div>
                         <Label htmlFor="qualification" className="font-bold">Medical Qualification *</Label>
                         <Input
@@ -592,9 +592,10 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                     )}
                   </div>
 
-                    <div className="flex justify-end">
-                      <Button onClick={handleNext} className="bg-primary hover:bg-primary/90">
-                        Next: Upload Documents
+                    <div className="flex justify-end pt-4 sm:pt-6">
+                      <Button onClick={handleNext} className="bg-primary hover:bg-primary/90 w-full sm:w-auto">
+                        <span className="sm:hidden">Next Step</span>
+                        <span className="hidden sm:inline">Next: Upload Documents</span>
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </div>
@@ -605,9 +606,9 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
 
             {currentStep === 2 && (
               <div>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-6">Document Upload</h2>
+                <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-900 mb-4 sm:mb-6">Document Upload</h2>
                 
-                <div className="space-y-8">
+                <div className="space-y-6 sm:space-y-8">
                   <FileUpload
                     type="photo"
                     file={files.photo}
@@ -723,16 +724,18 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                   />
                 </div>
 
-                <div className="flex justify-between mt-8">
+                <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mt-6 sm:mt-8">
                   <Button
                     variant="outline"
                     onClick={() => setCurrentStep(1)}
+                    className="w-full sm:w-auto order-2 sm:order-1"
                   >
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Back
                   </Button>
-                  <Button onClick={handleNext} className="bg-primary hover:bg-primary/90">
-                    Next: Payment
+                  <Button onClick={handleNext} className="bg-primary hover:bg-primary/90 w-full sm:w-auto order-1 sm:order-2">
+                    <span className="sm:hidden">Next Step</span>
+                    <span className="hidden sm:inline">Next: Payment</span>
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
@@ -741,11 +744,11 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
 
             {currentStep === 3 && (
               <div>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-6">Payment</h2>
+                <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-900 mb-4 sm:mb-6">Payment</h2>
                 
                 {/* Payment Summary */}
-                <div className="bg-gray-50 rounded-lg p-6 mb-8">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment Summary</h3>
+                <div className="bg-gray-50 rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Payment Summary</h3>
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Membership Type:</span>
@@ -768,31 +771,32 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                 </div>
 
                 {/* Payment Options */}
-                <div className="space-y-4 mb-8">
-                  <h3 className="text-lg font-semibold text-gray-900">Payment Options</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="border border-gray-300 rounded-lg p-4 text-center hover:border-primary cursor-pointer">
-                      <div className="text-3xl mb-2">📱</div>
-                      <p className="font-medium">UPI</p>
-                      <p className="text-sm text-gray-500">Google Pay, PhonePe, Paytm</p>
+                <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900">Payment Options</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                    <div className="border border-gray-300 rounded-lg p-3 sm:p-4 text-center hover:border-primary cursor-pointer">
+                      <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">📱</div>
+                      <p className="font-medium text-sm sm:text-base">UPI</p>
+                      <p className="text-xs sm:text-sm text-gray-500">Google Pay, PhonePe, Paytm</p>
                     </div>
-                    <div className="border border-gray-300 rounded-lg p-4 text-center hover:border-primary cursor-pointer">
-                      <div className="text-3xl mb-2">💳</div>
-                      <p className="font-medium">Debit/Credit Card</p>
-                      <p className="text-sm text-gray-500">Visa, Mastercard, RuPay</p>
+                    <div className="border border-gray-300 rounded-lg p-3 sm:p-4 text-center hover:border-primary cursor-pointer">
+                      <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">💳</div>
+                      <p className="font-medium text-sm sm:text-base">Debit/Credit Card</p>
+                      <p className="text-xs sm:text-sm text-gray-500">Visa, Mastercard, RuPay</p>
                     </div>
-                    <div className="border border-gray-300 rounded-lg p-4 text-center hover:border-primary cursor-pointer">
-                      <div className="text-3xl mb-2">🏦</div>
-                      <p className="font-medium">Net Banking</p>
-                      <p className="text-sm text-gray-500">All major banks</p>
+                    <div className="border border-gray-300 rounded-lg p-3 sm:p-4 text-center hover:border-primary cursor-pointer">
+                      <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">🏦</div>
+                      <p className="font-medium text-sm sm:text-base">Net Banking</p>
+                      <p className="text-xs sm:text-sm text-gray-500">All major banks</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex justify-between">
+                <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0">
                   <Button
                     variant="outline"
                     onClick={() => setCurrentStep(2)}
+                    className="w-full sm:w-auto order-2 sm:order-1"
                   >
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Back
@@ -800,7 +804,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                   <Button
                     onClick={handleSubmit}
                     disabled={registerMutation.isPending || paymentMutation.isPending}
-                    className="bg-green-600 hover:bg-green-700"
+                    className="bg-green-600 hover:bg-green-700 w-full sm:w-auto order-1 sm:order-2"
                   >
                     {registerMutation.isPending || paymentMutation.isPending ? (
                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
