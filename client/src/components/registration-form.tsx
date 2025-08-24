@@ -311,12 +311,9 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
           <CardContent className="p-8">
             {currentStep === 1 && (
               <div>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-8">Registration Information</h2>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-6">Personal Information</h2>
                 
-                {/* Personal Information Section */}
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-                  <h3 className="text-lg font-semibold text-blue-800 mb-4">Personal Information</h3>
-                  <div className="space-y-6">
+                <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <Label htmlFor="name" className="font-bold">Full Name *</Label>
@@ -452,6 +449,36 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                     </div>
                   </div>
 
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="joiningDate" className="font-bold">Date of Joining into Service *</Label>
+                      <Input
+                        id="joiningDate"
+                        type="date"
+                        {...form.register('joiningDate')}
+                        className={form.formState.errors.joiningDate ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
+                      />
+                      {form.formState.errors.joiningDate && (
+                        <p className="text-sm text-red-600">{form.formState.errors.joiningDate.message}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <Label htmlFor="designation" className="font-bold">Current Designation *</Label>
+                      <Input
+                        id="designation"
+                        {...form.register('designation')}
+                        placeholder="Enter your current designation (e.g., Medical Officer)"
+                        onFocus={(e) => e.target.placeholder = ''}
+                        onBlur={(e) => e.target.placeholder = 'Enter your current designation (e.g., Medical Officer)'}
+                        className={form.formState.errors.designation ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
+                      />
+                      {form.formState.errors.designation && (
+                        <p className="text-sm text-red-600">{form.formState.errors.designation.message}</p>
+                      )}
+                    </div>
+                  </div>
+
                   <div>
                     <Label htmlFor="address" className="font-bold">Permanent Residential Address *</Label>
                     <Textarea
@@ -467,73 +494,36 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       <p className="text-sm text-red-600">{form.formState.errors.address.message}</p>
                     )}
                   </div>
-                </div>
 
-                {/* Professional Information Section */}
-                <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
-                  <h3 className="text-lg font-semibold text-green-800 mb-4">Professional Information</h3>
-                  <div className="space-y-6">
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <Label htmlFor="joiningDate" className="font-bold">Date of Joining into Service *</Label>
-                        <Input
-                          id="joiningDate"
-                          type="date"
-                          {...form.register('joiningDate')}
-                          className={form.formState.errors.joiningDate ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
-                        />
-                        {form.formState.errors.joiningDate && (
-                          <p className="text-sm text-red-600">{form.formState.errors.joiningDate.message}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <Label htmlFor="designation" className="font-bold">Current Designation *</Label>
-                        <Input
-                          id="designation"
-                          {...form.register('designation')}
-                          placeholder="Enter your current designation (e.g., Medical Officer)"
-                          onFocus={(e) => e.target.placeholder = ''}
-                          onBlur={(e) => e.target.placeholder = 'Enter your current designation (e.g., Medical Officer)'}
-                          className={form.formState.errors.designation ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
-                        />
-                        {form.formState.errors.designation && (
-                          <p className="text-sm text-red-600">{form.formState.errors.designation.message}</p>
-                        )}
-                      </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="directorate" className="font-bold">Working Directorate *</Label>
+                      <Input
+                        id="directorate"
+                        {...form.register('directorate')}
+                        placeholder="Enter your working directorate (e.g., DMRHS, ESI)"
+                        onFocus={(e) => e.target.placeholder = ''}
+                        onBlur={(e) => e.target.placeholder = 'Enter your working directorate (e.g., DMRHS, ESI)'}
+                        className={form.formState.errors.directorate ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
+                      />
+                      {form.formState.errors.directorate && (
+                        <p className="text-sm text-red-600">{form.formState.errors.directorate.message}</p>
+                      )}
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <Label htmlFor="directorate" className="font-bold">Working Directorate *</Label>
-                        <Input
-                          id="directorate"
-                          {...form.register('directorate')}
-                          placeholder="Enter your working directorate (e.g., DMRHS, ESI)"
-                          onFocus={(e) => e.target.placeholder = ''}
-                          onBlur={(e) => e.target.placeholder = 'Enter your working directorate (e.g., DMRHS, ESI)'}
-                          className={form.formState.errors.directorate ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
-                        />
-                        {form.formState.errors.directorate && (
-                          <p className="text-sm text-red-600">{form.formState.errors.directorate.message}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <Label htmlFor="workingStation" className="font-bold">Current Working Station *</Label>
-                        <Input
-                          id="workingStation"
-                          {...form.register('workingStation')}
-                          placeholder="Enter hospital/clinic name"
-                          onFocus={(e) => e.target.placeholder = ''}
-                          onBlur={(e) => e.target.placeholder = 'Enter hospital/clinic name'}
-                          className={form.formState.errors.workingStation ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
-                        />
-                        {form.formState.errors.workingStation && (
-                          <p className="text-sm text-red-600">{form.formState.errors.workingStation.message}</p>
-                        )}
-                      </div>
+                    <div>
+                      <Label htmlFor="workingStation" className="font-bold">Current Working Station *</Label>
+                      <Input
+                        id="workingStation"
+                        {...form.register('workingStation')}
+                        placeholder="Enter hospital/clinic name"
+                        onFocus={(e) => e.target.placeholder = ''}
+                        onBlur={(e) => e.target.placeholder = 'Enter hospital/clinic name'}
+                        className={form.formState.errors.workingStation ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
+                      />
+                      {form.formState.errors.workingStation && (
+                        <p className="text-sm text-red-600">{form.formState.errors.workingStation.message}</p>
+                      )}
                     </div>
 
                     <div>
@@ -542,7 +532,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         value={form.watch('district')}
                         onValueChange={(value) => form.setValue('district', value)}
                       >
-                        <SelectTrigger className={form.formState.errors.district ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}>
+                        <SelectTrigger>
                           <SelectValue placeholder="Select District" />
                         </SelectTrigger>
                         <SelectContent>
@@ -557,34 +547,33 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         <p className="text-sm text-red-600">{form.formState.errors.district.message}</p>
                       )}
                     </div>
-
-                    <div>
-                      <Label className="font-bold">Membership Type *</Label>
-                      <RadioGroup
-                        value={form.watch('membershipType')}
-                        onValueChange={(value) => form.setValue('membershipType', value as any)}
-                        className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3"
-                      >
-                        {MEMBERSHIP_TYPES.map((option) => (
-                          <Label
-                            key={option.value}
-                            htmlFor={option.value}
-                            className="flex items-center p-4 border border-gray-300 rounded-lg hover:border-primary cursor-pointer"
-                          >
-                            <RadioGroupItem value={option.value} id={option.value} className="mr-3" />
-                            <div>
-                              <span className="text-sm font-medium text-gray-700">{option.label}</span>
-                              <p className="text-xs text-gray-500">{option.description}</p>
-                            </div>
-                          </Label>
-                        ))}
-                      </RadioGroup>
-                      {form.formState.errors.membershipType && (
-                        <p className="text-sm text-red-600">{form.formState.errors.membershipType.message}</p>
-                      )}
-                    </div>
                   </div>
-                </div>
+
+                  <div>
+                    <Label className="font-bold">Membership Type *</Label>
+                    <RadioGroup
+                      value={form.watch('membershipType')}
+                      onValueChange={(value) => form.setValue('membershipType', value as any)}
+                      className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3"
+                    >
+                      {MEMBERSHIP_TYPES.map((option) => (
+                        <Label
+                          key={option.value}
+                          htmlFor={option.value}
+                          className="flex items-center p-4 border border-gray-300 rounded-lg hover:border-primary cursor-pointer"
+                        >
+                          <RadioGroupItem value={option.value} id={option.value} className="mr-3" />
+                          <div>
+                            <span className="text-sm font-medium text-gray-700">{option.label}</span>
+                            <p className="text-xs text-gray-500">{option.description}</p>
+                          </div>
+                        </Label>
+                      ))}
+                    </RadioGroup>
+                    {form.formState.errors.membershipType && (
+                      <p className="text-sm text-red-600">{form.formState.errors.membershipType.message}</p>
+                    )}
+                  </div>
 
                   <div className="flex justify-end">
                     <Button onClick={handleNext} className="bg-primary hover:bg-primary/90">
