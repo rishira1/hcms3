@@ -47,8 +47,8 @@ export default function Home() {
       <footer className="mt-16 pt-8 border-t border-gray-200 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-sm text-gray-600">
-            <p>Created by <span className="font-semibold">Rishi Software Services</span></p>
-            <p className="mt-1">In cooperation with <span className="font-semibold">Dr. Kuldeep, Joint Secretary HCMSA Karnal</span></p>
+            <p>Developed by <span className="font-semibold">Rishi Software Services</span></p>
+            <p className="mt-1">In cooperation with Dr. Kuldeep, Joint Secretary HCMSA Karnal</p>
           </div>
         </div>
       </footer>
