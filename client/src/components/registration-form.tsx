@@ -316,14 +316,11 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                 {/* Personal Information Section */}
                 <div className="mb-10">
                   <div className="flex items-center mb-6">
-                    <div className="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                      <span className="text-blue-600 font-semibold text-sm">1</span>
-                    </div>
                     <h3 className="text-xl font-semibold text-gray-800">Personal Information</h3>
                   </div>
                   
-                  <div className="space-y-6 pl-11">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <Label htmlFor="name" className="font-bold">Full Name *</Label>
                       <Input
@@ -443,19 +440,32 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                         <p className="text-sm text-red-600">{form.formState.errors.aadhaar.message}</p>
                       )}
                     </div>
+                    
+                    <div>
+                      <Label htmlFor="address" className="font-bold">Permanent Residential Address *</Label>
+                      <Textarea
+                        id="address"
+                        {...form.register('address')}
+                        placeholder="Enter your complete permanent address"
+                        rows={3}
+                        onFocus={(e) => e.target.placeholder = ''}
+                        onBlur={(e) => e.target.placeholder = 'Enter your complete permanent address'}
+                        className={form.formState.errors.address ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
+                      />
+                      {form.formState.errors.address && (
+                        <p className="text-sm text-red-600">{form.formState.errors.address.message}</p>
+                      )}
+                    </div>
                   </div>
                 </div>
 
                 {/* Professional Information Section */}
-                <div className="mb-8">
+                <div className="mb-8 mt-12">
                   <div className="flex items-center mb-6">
-                    <div className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                      <span className="text-green-600 font-semibold text-sm">2</span>
-                    </div>
                     <h3 className="text-xl font-semibold text-gray-800">Professional Information</h3>
                   </div>
                   
-                  <div className="space-y-6 pl-11">
+                  <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <Label htmlFor="qualification" className="font-bold">Medical Qualification *</Label>
@@ -501,21 +511,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                     </div>
                   </div>
 
-                  <div>
-                    <Label htmlFor="address" className="font-bold">Permanent Residential Address *</Label>
-                    <Textarea
-                      id="address"
-                      {...form.register('address')}
-                      placeholder="Enter your complete permanent address"
-                      rows={3}
-                      onFocus={(e) => e.target.placeholder = ''}
-                      onBlur={(e) => e.target.placeholder = 'Enter your complete permanent address'}
-                      className={form.formState.errors.address ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
-                    />
-                    {form.formState.errors.address && (
-                      <p className="text-sm text-red-600">{form.formState.errors.address.message}</p>
-                    )}
-                  </div>
+
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
