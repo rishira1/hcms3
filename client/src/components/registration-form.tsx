@@ -311,9 +311,18 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
           <CardContent className="p-8">
             {currentStep === 1 && (
               <div>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-6">Personal Information</h2>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-8">Registration Information</h2>
                 
-                <div className="space-y-6">
+                {/* Personal Information Section */}
+                <div className="mb-10">
+                  <div className="flex items-center mb-6">
+                    <div className="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                      <span className="text-blue-600 font-semibold text-sm">1</span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-800">Personal Information</h3>
+                  </div>
+                  
+                  <div className="space-y-6 pl-11">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <Label htmlFor="name" className="font-bold">Full Name *</Label>
@@ -346,20 +355,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       )}
                     </div>
 
-                    <div>
-                      <Label htmlFor="qualification" className="font-bold">Medical Qualification *</Label>
-                      <Input
-                        id="qualification"
-                        {...form.register('qualification')}
-                        placeholder="Enter your medical qualification (e.g., MBBS, MBBS MD)"
-                        onFocus={(e) => e.target.placeholder = ''}
-                        onBlur={(e) => e.target.placeholder = 'Enter your medical qualification (e.g., MBBS, MBBS MD)'}
-                        className={form.formState.errors.qualification ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
-                      />
-                      {form.formState.errors.qualification && (
-                        <p className="text-sm text-red-600">{form.formState.errors.qualification.message}</p>
-                      )}
-                    </div>
+
 
                     <div>
                       <Label htmlFor="dob" className="font-bold">Date of Birth *</Label>
@@ -448,10 +444,36 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       )}
                     </div>
                   </div>
+                </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <Label htmlFor="joiningDate" className="font-bold">Date of Joining into Service *</Label>
+                {/* Professional Information Section */}
+                <div className="mb-8">
+                  <div className="flex items-center mb-6">
+                    <div className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                      <span className="text-green-600 font-semibold text-sm">2</span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-800">Professional Information</h3>
+                  </div>
+                  
+                  <div className="space-y-6 pl-11">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <Label htmlFor="qualification" className="font-bold">Medical Qualification *</Label>
+                        <Input
+                          id="qualification"
+                          {...form.register('qualification')}
+                          placeholder="Enter your medical qualification (e.g., MBBS, MBBS MD)"
+                          onFocus={(e) => e.target.placeholder = ''}
+                          onBlur={(e) => e.target.placeholder = 'Enter your medical qualification (e.g., MBBS, MBBS MD)'}
+                          className={form.formState.errors.qualification ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
+                        />
+                        {form.formState.errors.qualification && (
+                          <p className="text-sm text-red-600">{form.formState.errors.qualification.message}</p>
+                        )}
+                      </div>
+
+                      <div>
+                        <Label htmlFor="joiningDate" className="font-bold">Date of Joining into Service *</Label>
                       <Input
                         id="joiningDate"
                         type="date"
@@ -575,11 +597,14 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                     )}
                   </div>
 
-                  <div className="flex justify-end">
-                    <Button onClick={handleNext} className="bg-primary hover:bg-primary/90">
-                      Next: Upload Documents
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
+                    </div>
+
+                    <div className="flex justify-end">
+                      <Button onClick={handleNext} className="bg-primary hover:bg-primary/90">
+                        Next: Upload Documents
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
