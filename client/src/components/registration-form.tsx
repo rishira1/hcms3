@@ -311,17 +311,15 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
           <CardContent className="p-8">
             {currentStep === 1 && (
               <div>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-8">Registration Information</h2>
-                
                 {/* Personal Information Section */}
-                <div className="mb-10">
-                  <div className="flex items-center mb-6">
-                    <h3 className="text-xl font-semibold text-gray-800">Personal Information</h3>
+                <div className="mb-12">
+                  <div className="flex items-center mb-8">
+                    <h3 className="text-xl font-semibold text-gray-800 border-b-2 border-blue-500 pb-2">Personal Information</h3>
                   </div>
                   
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
+                      <div>
                       <Label htmlFor="name" className="font-bold">Full Name *</Label>
                       <Input
                         id="name"
@@ -367,8 +365,8 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       )}
                     </div>
 
-                    <div>
-                      <Label className="font-bold">Gender *</Label>
+                      <div>
+                        <Label className="font-bold">Gender *</Label>
                       <RadioGroup
                         value={form.watch('gender')}
                         onValueChange={(value) => form.setValue('gender', value as 'Male' | 'Female')}
@@ -384,24 +382,24 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       {form.formState.errors.gender && (
                         <p className="text-sm text-red-600">{form.formState.errors.gender.message}</p>
                       )}
-                    </div>
+                      </div>
 
-                    <div>
-                      <Label htmlFor="spouseName" className="font-bold">Name of Spouse (If Married)</Label>
-                      <Input
-                        id="spouseName"
-                        {...form.register('spouseName')}
-                        placeholder="Enter spouse name if married"
-                        onFocus={(e) => e.target.placeholder = ''}
-                        onBlur={(e) => e.target.placeholder = 'Enter spouse name if married'}
-                      />
-                      {form.formState.errors.spouseName && (
-                        <p className="text-sm text-red-600">{form.formState.errors.spouseName.message}</p>
-                      )}
-                    </div>
+                      <div>
+                        <Label htmlFor="spouseName" className="font-bold">Name of Spouse (If Married)</Label>
+                        <Input
+                          id="spouseName"
+                          {...form.register('spouseName')}
+                          placeholder="Enter spouse name if married"
+                          onFocus={(e) => e.target.placeholder = ''}
+                          onBlur={(e) => e.target.placeholder = 'Enter spouse name if married'}
+                        />
+                        {form.formState.errors.spouseName && (
+                          <p className="text-sm text-red-600">{form.formState.errors.spouseName.message}</p>
+                        )}
+                      </div>
 
-                    <div>
-                      <Label htmlFor="panNumber" className="font-bold">PAN Number *</Label>
+                      <div>
+                        <Label htmlFor="panNumber" className="font-bold">PAN Number *</Label>
                       <Input
                         id="panNumber"
                         {...form.register('panNumber')}
@@ -419,10 +417,10 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       {form.formState.errors.panNumber && (
                         <p className="text-sm text-red-600">{form.formState.errors.panNumber.message}</p>
                       )}
-                    </div>
+                      </div>
 
-                    <div>
-                      <Label htmlFor="aadhaar" className="font-bold">Aadhaar Number *</Label>
+                      <div>
+                        <Label htmlFor="aadhaar" className="font-bold">Aadhaar Number *</Label>
                       <Input
                         id="aadhaar"
                         {...form.register('aadhaar')}
@@ -439,6 +437,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       {form.formState.errors.aadhaar && (
                         <p className="text-sm text-red-600">{form.formState.errors.aadhaar.message}</p>
                       )}
+                      </div>
                     </div>
                     
                     <div>
@@ -460,9 +459,9 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                 </div>
 
                 {/* Professional Information Section */}
-                <div className="mb-8 mt-12">
-                  <div className="flex items-center mb-6">
-                    <h3 className="text-xl font-semibold text-gray-800">Professional Information</h3>
+                <div className="mb-8">
+                  <div className="flex items-center mb-8">
+                    <h3 className="text-xl font-semibold text-gray-800 border-b-2 border-green-500 pb-2">Professional Information</h3>
                   </div>
                   
                   <div className="space-y-6">
@@ -592,8 +591,6 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                       <p className="text-sm text-red-600">{form.formState.errors.membershipType.message}</p>
                     )}
                   </div>
-
-                    </div>
 
                     <div className="flex justify-end">
                       <Button onClick={handleNext} className="bg-primary hover:bg-primary/90">
